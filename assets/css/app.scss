@@ -3,10 +3,51 @@
 @import "../node_modules/nprogress/nprogress.css";
 @import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
+/* color */
+$dark: rgb(43, 44, 44);
+$lightdark: rgb(33, 37, 41);
+$light: rgb(223, 223, 223);
+
+/* General */
+
 body {
-  padding-top: 5rem;
+  margin-top: 5rem;
 }
 
+.round {
+  border-radius: 5px;
+  background: $dark;
+  margin: 0px !important;
+  padding: 10px;
+}
+
+.borderless {
+  border-collapse: collapse;
+}
+
+.borderless td, .borderless th {
+  border: none;
+}
+
+.bg-primary {
+  background-color: $light !important;
+  color: $dark;
+}
+
+/* Widget */
+.cardy {
+  background-color: $lightdark !important;
+  color: $light;
+  height: 100%;
+}
+
+/* Linkbox */
+.url {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: monospace;
+}
 /* Chatbox */
 .chatbox {
   font-size: 0.8rem;
