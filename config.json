@@ -1,0 +1,10 @@
+{
+    "user": "irCois The Second",
+    "server": "chat.freenode.org",
+    "port": 6667,
+    "password": "",
+    "nickname": "ircoisv2",
+    "channels": [
+        "#ircois"
+    ]
+}

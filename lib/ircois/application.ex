@@ -14,9 +14,9 @@ defmodule Ircois.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: Ircois.PubSub},
       # Start the Endpoint (http/https)
-      IrcoisWeb.Endpoint
+      IrcoisWeb.Endpoint,
       # Start a worker by calling: Ircois.Worker.start_link(arg)
-      # {Ircois.Worker, arg}
+      Supervisor.Connection
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
