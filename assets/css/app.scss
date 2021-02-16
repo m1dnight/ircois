@@ -6,6 +6,25 @@
 body {
   padding-top: 5rem;
 }
+
+/* Chatbox */
+.chatbox {
+  font-size: 0.8rem;
+}
+
+table tr td {
+  vertical-align: middle;
+}
+
+table tr td.nickname {
+  text-align: right;
+}
+
+table.chatbox tr td {
+  padding-top: 0rem;
+  padding-bottom: 0rem;
+}
+
 /* Alerts and form errors */
 .alert {
   padding: 15px;
