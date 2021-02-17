@@ -4,33 +4,13 @@
     <div class="cardy round">
       <table class="table table-dark borderless chatbox round">
         <tbody>
+          <%= for m <- @messages do %>
           <tr class="borderless">
-            <td class="timestamp">12:12:01</td>
-            <td class="nickname" style="color: purple;">m1dnight</td>
-            <td>Woa, this is really cool. I wonder what a long line looks like on the webpage. Tables typically don't
-              look really good on small pages. Or do they? I have no freakin' clue. That's why I'm typing a long
-              sentence like an idiot.</td>
+            <td class="timestamp"><%= show_time(m.when) %></td>
+            <td class="nickname" style="color: purple;"><%= m.from %></td>
+            <td class="message"><%= m.content %></td>
           </tr>
-          <tr class="borderless">
-            <td class="timestamp">12:12:01</td>
-            <td class="nickname" style="color: green;">Ichabod</td>
-            <td>Cloudflare, Cloudflare!</td>
-          </tr>
-          <tr class="borderless">
-            <td class="timestamp">12:12:01</td>
-            <td class="nickname" style="color: blue;">Botje</td>
-            <td>Neen!</td>
-          </tr>
-          <tr class="borderless">
-            <td class="timestamp">12:12:01</td>
-            <td class="nickname" style="color: orange;">robbe</td>
-            <td>Jawel!</td>
-          </tr>
-          <tr class="borderless">
-            <td class="timestamp">12:12:01</td>
-            <td class="nickname" style="color: pink;">irCois</td>
-            <td>Uw Moeder!</td>
-          </tr>
+          <% end %>
         </tbody>
       </table>
     </div>

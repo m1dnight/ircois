@@ -12,11 +12,11 @@ defmodule Ircois.Application do
       # Start the Telemetry supervisor
       IrcoisWeb.Telemetry,
       # Start the PubSub system
-      {Phoenix.PubSub, name: Ircois.PubSub},
+      {Phoenix.PubSub, [name: Ircois.PubSub, adapter: Phoenix.PubSub.PG2]},
       # Start the Endpoint (http/https)
       IrcoisWeb.Endpoint,
       # Start a worker by calling: Ircois.Worker.start_link(arg)
-      Supervisor.Connection
+      Supervisor.Connection,
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

@@ -48,7 +48,8 @@ defmodule Ircois.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:exirc, "~> 2.0"},
-      {:poison, "~> 4.0"}
+      {:poison, "~> 4.0"},
+      {:tz, "~> 0.10.0"}
     ]
   end
 

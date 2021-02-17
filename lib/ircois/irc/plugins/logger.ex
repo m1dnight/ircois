@@ -23,7 +23,11 @@ defmodule Bot.Logger do
   ##############################################################################
   # Event Handlers
   def handle_info({:received, msg, from, channel}, client) do
-    Logger.debug "Logging #{from.nick}: #{msg}"
+    Logger.debug "Logging #{from.nick}: #{msg} in #{inspect channel}"
+    from = from.nick
+    msg = msg
+    channel = channel
+    Ircois.Data.store_message(%{:from => from, :content => msg, :channel => channel})
     {:noreply, client}
   end
 
