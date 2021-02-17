@@ -17,6 +17,8 @@ services:
       - DATABASE_HOST=db
       - PORT=${PORT}
       - TZ=${TZ}
+    volumes:
+      - '${CONFIG}:/app/config.json'
     ports:
       - ${PORT}:${PORT}
     networks:

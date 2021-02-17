@@ -7,13 +7,13 @@ defmodule Supervisor.Bot do
 
   def init(client_name) do
     children = [
-      worker(Bot.Logger, [client_name])
-      # worker(Bot.Ohai, [client_name]),
+      worker(Bot.Logger, [client_name]),
+      worker(Bot.Ohai, [client_name]),
       # worker(Bot.Pedantic, [client_name]),
-      # worker(Bot.Karma, [client_name]),
+      worker(Bot.Karma, [client_name]),
       # worker(Bot.Parentheses, [client_name]),
       # worker(Bot.Sentiment, [client_name]),
-      # worker(Bot.UwMoeder, [client_name]),
+      worker(Bot.UwMoeder, [client_name]),
       # worker(Bot.Seen, [client_name])
     ]
 

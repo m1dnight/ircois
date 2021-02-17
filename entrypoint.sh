@@ -11,7 +11,7 @@ done
 bin="/app/bin/ircois"
 
 # Setup the database.
-# eval "$bin eval \"Ircois.Release.migrate\""
+eval "$bin eval \"Ircois.Release.migrate\""
 
 # start the elixir application
 exec "$bin" "start" 

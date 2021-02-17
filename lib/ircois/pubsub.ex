@@ -5,6 +5,24 @@ defmodule Ircois.PubSub do
     Phoenix.PubSub.subscribe(__MODULE__, @topic)
   end
 
+  def notify_new_url({:error, err}) do
+    {:error, err}
+  end
+
+  def notify_new_url({:ok, message}) do
+    Phoenix.PubSub.broadcast(__MODULE__, @topic, {:new_url, message})
+    {:ok, message}
+  end
+
+  def notify_karma_update({:error, err}) do
+    {:error, err}
+  end
+
+  def notify_karma_update({:ok, message}) do
+    Phoenix.PubSub.broadcast(__MODULE__, @topic, {:new_karma, message})
+    {:ok, message}
+  end
+
   def notify_new_message({:error, err}) do
     {:error, err}
   end
