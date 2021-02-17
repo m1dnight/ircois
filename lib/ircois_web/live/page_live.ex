@@ -12,7 +12,7 @@ defmodule IrcoisWeb.PageLive do
     PubSub.subscribe()
 
     # Last n messages
-    messages = Ircois.Data.get_last_n(default_channel, 10)
+    messages = Ircois.Data.get_last_n(default_channel, 10) |> color_nicknames()
     socket = assign(socket, :messages, messages)
 
     # Karma top 10
@@ -33,7 +33,7 @@ defmodule IrcoisWeb.PageLive do
 
   def handle_info({:new_message, message}, socket) do
     # Last n messages
-    messages = Ircois.Data.get_last_n(socket.assigns.channel, 10)
+    messages = Ircois.Data.get_last_n(socket.assigns.channel, 10) |> color_nicknames()
 
     socket = assign(socket, :messages, messages)
     {:noreply, socket}
@@ -60,5 +60,22 @@ defmodule IrcoisWeb.PageLive do
     datetime
     |> DateTime.to_time()
     |> Time.to_string()
+  end
+
+  defp color_nicknames(messages) do
+    :random.seed(:os.timestamp())
+
+    {_, messages} =
+      messages
+      |> Enum.reduce({%{}, []}, fn message, {colors, messages} ->
+        colors =
+          Map.put_new(colors, message.from, :rand.uniform(16_777_215) |> Integer.to_string(16))
+
+        color = Map.get(colors, message.from)
+        new_message = Map.put(message, :color, color)
+        {colors, [new_message | messages]}
+      end)
+
+    messages
   end
 end

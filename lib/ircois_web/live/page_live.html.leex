@@ -7,7 +7,7 @@
           <%= for m <- @messages do %>
           <tr class="borderless">
             <td class="timestamp"><%= show_time(m.when) %></td>
-            <td class="nickname" style="color: purple;"><%= m.from %></td>
+            <td class="nickname" style="color: #<%= m.color %>;"><%= m.from %></td>
             <td class="message"><%= m.content %></td>
           </tr>
           <% end %>
