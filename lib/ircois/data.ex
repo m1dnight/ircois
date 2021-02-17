@@ -9,11 +9,11 @@ defmodule Ircois.Data do
   def store_message(attrs) do
     attrs = Map.put(attrs, :when, now_tz())
 
-    result =
-      struct(Message)
-      |> Message.changeset(attrs)
-      |> Repo.insert()
-      |> notify_new_message()
+    struct(Message)
+    |> Message.changeset(attrs)
+    |> Repo.insert()
+    |> PubSub.notify_new_message()
+
   end
 
   def get_last_n(channel, n \\ 10) do
