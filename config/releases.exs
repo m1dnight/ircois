@@ -61,3 +61,9 @@ timezone =
     """
 
 config :ircois, timezone: timezone
+
+debuglevel =
+  System.get_env("DEBUG") ||
+    false
+
+config :logger, level: if debuglevel, do: :debug, else: :info
