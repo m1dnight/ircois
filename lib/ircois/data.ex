@@ -15,7 +15,7 @@ defmodule Ircois.Data do
 
     case result do
       {:ok, m} ->
-        PubSub.publish(:incoming_message, m)
+        Phoenix.PubSub.broadcast(Ircois.PubSub, "messages", m)
         m
 
       _ ->

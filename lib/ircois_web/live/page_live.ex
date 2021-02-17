@@ -5,7 +5,8 @@ defmodule IrcoisWeb.PageLive do
 
   @impl true
   def mount(_params, _session, socket) do
-    Logger.debug("Socket mounted")
+    Logger.debug("Socket mounted #{inspect socket, pretty: true} #{inspect self()}")
+
 
     # Subscribe to updates from the channel.
     PubSub.subscribe(Ircois.PubSub, "messages")
@@ -17,15 +18,11 @@ defmodule IrcoisWeb.PageLive do
     {:ok, socket}
   end
 
-  @impl true
-  def handle_event(event, _params, socket) do
-    Logger.error("HANDLE EVENT FOR #{inspect(event)}")
-    {:noreply, socket}
-  end
+  def handle_info(%Ircois.Message{}, socket) do
+    # Last n messages
+    messages = Ircois.Data.get_last_n("#ircois", 10)
 
-  @impl true
-  def handle_info(message, socket) do
-    Logger.error("HANDLE INFO FOR #{inspect(message)}")
+    socket = assign(socket, :messages, messages)
     {:noreply, socket}
   end
 
