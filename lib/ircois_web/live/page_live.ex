@@ -1,7 +1,7 @@
 defmodule IrcoisWeb.PageLive do
   use IrcoisWeb, :live_view
   require Logger
-  alias Phoenix.PubSub
+  alias Ircois.PubSub
 
   @impl true
   def mount(_params, _session, socket) do
@@ -9,7 +9,7 @@ defmodule IrcoisWeb.PageLive do
 
 
     # Subscribe to updates from the channel.
-    PubSub.subscribe(Ircois.PubSub, "messages")
+    PubSub.subscribe()
 
     # Last n messages
     messages = Ircois.Data.get_last_n("#ircois", 10)

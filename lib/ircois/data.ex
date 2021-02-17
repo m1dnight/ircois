@@ -2,6 +2,7 @@ defmodule Ircois.Data do
   alias Ircois.Message
   alias Ircois.Repo
   import Ecto.Query
+  alias Ircois.PubSub
 
   ##############################################################################
   # Messages
@@ -12,15 +13,7 @@ defmodule Ircois.Data do
       struct(Message)
       |> Message.changeset(attrs)
       |> Repo.insert()
-
-    case result do
-      {:ok, m} ->
-        Phoenix.PubSub.broadcast(Ircois.PubSub, "messages", m)
-        m
-
-      _ ->
-        result
-    end
+      |> notify_new_message()
   end
 
   def get_last_n(channel, n \\ 10) do
