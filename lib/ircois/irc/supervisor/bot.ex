@@ -14,6 +14,7 @@ defmodule Supervisor.Bot do
       # worker(Bot.Parentheses, [client_name]),
       # worker(Bot.Sentiment, [client_name]),
       worker(Bot.UwMoeder, [client_name]),
+      worker(Bot.Bitcoin, [client_name]),
       # worker(Bot.Seen, [client_name])
     ]
 
