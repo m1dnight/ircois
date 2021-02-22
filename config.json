@@ -6,5 +6,6 @@
     "nickname": "ircoisv2",
     "channels": [
         "#ircois"
-    ]
+    ],
+    "coinmarketcap": "key"
 }

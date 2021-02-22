@@ -1,5 +1,5 @@
 defmodule Ircois.Config do
-  defstruct channels: [], nickname: nil, password: nil, port: nil, server: nil, user: nil, client: nil
+  defstruct channels: [], nickname: nil, password: nil, port: nil, server: nil, user: nil, client: nil, coinmarketcap: nil
   require Logger
 
   def default_config() do
