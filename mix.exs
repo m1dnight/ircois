@@ -50,7 +50,8 @@ defmodule Ircois.MixProject do
       {:exirc, "~> 2.0"},
       {:poison, "~> 4.0"},
       {:tz, "~> 0.10.0"},
-      {:httpoison, "~> 1.7"}
+      {:httpoison, "~> 1.7"},
+      {:number, "~> 1.0.1"}
     ]
   end
 

@@ -1,6 +1,7 @@
 defmodule Bot.Bitcoin do
   require Logger
   alias Ircois.Config
+  import Number.Currency
 
   @moduledoc """
   This plugin keeps track of karma of things.
@@ -53,8 +54,8 @@ defmodule Bot.Bitcoin do
       eth_value = Map.get(data, "1027") |> Map.get("quote") |> Map.get("USD") |> Map.get("price")
       ltc_value = Map.get(data, "2") |> Map.get("quote") |> Map.get("USD") |> Map.get("price")
 
-      "Bitcoin: $#{btc_value |> Float.ceil(2)}, Litecoin: $#{ltc_value |> Float.ceil(2)}, Ethereum: $#{
-        eth_value |> Float.ceil(2)
+      "Bitcoin: #{btc_value |> number_to_currency}, Litecoin: #{ltc_value |> number_to_currency}, Ethereum: #{
+        eth_value |> number_to_currency
       }"
     end
   end
