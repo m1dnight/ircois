@@ -10,96 +10,87 @@ $light: rgb(223, 223, 223);
 
 /* General */
 
+// Reset margin by bootstrap.
+.table {
+	margin: 0rem !important;
+}
+
 body {
-  margin-top: 5rem;
-}
-
-.round {
-  border-radius: 5px;
-  background: $dark;
-  margin: 1rem !important;
-  padding: 10px;
-}
-
-.borderless {
-  border-collapse: collapse;
-}
-
-.borderless td, .borderless th {
-  border: none;
-}
-
-.bg-primary {
-  background-color: $light !important;
-  color: $dark;
-}
-
-/* Widget */
-.cardy {
-  background-color: $lightdark !important;
+	margin-top: 5rem;
   color: $light;
-  height: 100%;
+}
+
+/* Widgets */
+.widget {
+	margin: 0.5rem !important;
+  // padding: 0.5rem !important;
+	background-color: $lightdark;
 }
 
 /* Linkbox */
 .url {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  font-family: monospace;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	font-family: monospace;
 }
+
 /* Chatbox */
-.chatbox {
-  font-size: 0.8rem;
-}
-
-table tr td {
-  vertical-align: middle;
-}
-
-table tr td.nickname {
-  text-align: right;
-}
-
-table tr td.message {
-  width: 99%;
+table.chatbox {
+	font-family: monospace;
+	font-size: 0.8rem;
+  border: none !important;
+  color: $light;
 }
 
 table.chatbox tr td {
-  padding-top: 0rem;
-  padding-bottom: 0rem;
+	vertical-align: middle;
+  border: none !important;
+}
+
+table.chatbox tr td.nickname {
+	text-align: right;
+}
+
+table.chatbox tr td.message {
+	width: 99%;
+}
+
+table.chatbox.chatbox tr td {
+	padding-top: 0rem;
+	padding-bottom: 0rem;
 }
 
 /* Alerts and form errors */
 .alert {
-  padding: 15px;
-  margin-bottom: 20px;
-  border: 1px solid transparent;
-  border-radius: 4px;
+	padding: 15px;
+	margin-bottom: 20px;
+	border: 1px solid transparent;
+	border-radius: 4px;
 }
 .alert-info {
-  color: #31708f;
-  background-color: #d9edf7;
-  border-color: #bce8f1;
+	color: #31708f;
+	background-color: #d9edf7;
+	border-color: #bce8f1;
 }
 .alert-warning {
-  color: #8a6d3b;
-  background-color: #fcf8e3;
-  border-color: #faebcc;
+	color: #8a6d3b;
+	background-color: #fcf8e3;
+	border-color: #faebcc;
 }
 .alert-danger {
-  color: #a94442;
-  background-color: #f2dede;
-  border-color: #ebccd1;
+	color: #a94442;
+	background-color: #f2dede;
+	border-color: #ebccd1;
 }
 .alert p {
-  margin-bottom: 0;
+	margin-bottom: 0;
 }
 .alert:empty {
-  display: none;
+	display: none;
 }
 .invalid-feedback {
-  color: #a94442;
-  display: block;
-  margin: -1rem 0 2rem;
+	color: #a94442;
+	display: block;
+	margin: -1rem 0 2rem;
 }

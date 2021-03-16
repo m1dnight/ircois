@@ -1,177 +1,79 @@
 <!-- chatbox -->
 <div class="row m-4">
-  <div class="col-12">
-    <div class="cardy round">
-      <table class="table table-dark borderless chatbox round">
-        <tbody>
-          <%= for m <- @messages do %>
-          <tr class="borderless">
-            <td class="timestamp"><%= show_time(m.when) %></td>
-            <td class="nickname" style="color: #<%= m.color %>;"><%= m.from %></td>
-            <td class="message"><%= m.content %></td>
-          </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-  </div>
+	<div class="col-lg-12">
+		<div class="widget">
+			<table class="table chatbox">
+				<tbody>
+					<%= for m <- @messages do %>
+					<tr class="timestamp">
+						<td class=""><%= show_time(m.when) %></td>
+						<td class="nickname" style="color: #<%= m.color %>;"><%= m.from %></td>
+						<td class="message"><%= m.content %></td>
+					</tr>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+	</div>
 </div>
+
 <!-- Widgets -->
-<div class="row m-4 row-eq-height">
-  <!-- Karma Top 10 -->
-  <div class="col-lg-3">
-    <div class="card borderless cardy">
-      <div class="card-body">
-        <h5 class="card-title text-center">Karma Top 10</h5>
-        <ul class="list-group">
-          <%= for k <- @karma_top_10 do %>
-          <li class="d-flex justify-content-between align-items-center">
-            <%= k.subject %>
-            <span class="badge bg-primary badge-pill"><%= k.karma %></span>
-          </li>
-          <% end %>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <!-- Karma Bottom 10 -->
-  <div class="col-lg-3">
-    <div class="card borderless cardy">
-      <div class="card-body">
-        <h5 class="card-title text-center">Karma Bottom 10</h5>
-        <ul class="list-group">
-          <%= for k <- @karma_bottom_10 do %>
-          <li class="d-flex justify-content-between align-items-center">
-            <%= k.subject %>
-            <span class="badge bg-danger badge-pill"><%= k.karma %></span>
-          </li>
-          <% end %>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <!-- Last Links -->
-  <div class="col-lg-6">
-    <div class="card borderless cardy">
-      <div class="card-body">
-        <h5 class="card-title text-center">Latest URLs</h5>
-        <ul class="list-group">
-          <%= for u <- @urls do %>
-          <li class="d-flex justify-content-between align-items-center">
-            <span class="url">
-              <a href="<%= raw(u.url) %>">
-              <%= u.url %>
-              </a>
-            </span>
-          </li>
-          <% end %>
-        </ul>
-      </div>
-    </div>
-  </div>
+<div class="row m-4">
+	<!-- Karma Top 10 -->
+	<div class="col-lg-4">
+		<div class="widget h-100">
+			<div class="">
+				<div class="card-body">
+					<h5 class="card-title text-center">Karma Top 10</h5>
+					<ul class="list-group">
+					<%= for k <- @karma_top_10 do %>
+					<li class="d-flex justify-content-between align-items-center">
+					<%= k.subject %>
+					<span class="badge bg-primary badge-pill"><%= k.karma %></span>
+					</li>
+					<% end %>
+					</ul>
+				</div><!-- card body -->
+			</div><!-- card -->
+		</div> <!-- widget -->
+	</div> <!-- col -->
+	<!-- Karma Bottom 10 -->
+	<div class="col-lg-4">
+		<div class="widget h-100">
+			<div class="">
+				<div class="card-body">
+					<h5 class="card-title text-center">Karma Bottom 10</h5>
+					<ul class="list-group">
+					<%= for k <- @karma_bottom_10 do %>
+					<li class="d-flex justify-content-between align-items-center">
+					<%= k.subject %>
+					<span class="badge bg-danger badge-pill"><%= k.karma %></span>
+					</li>
+					<% end %>
+					</ul>
+				</div><!-- card body -->
+			</div> <!-- card -->
+		</div> <!-- widget -->
+	</div><!-- col -->
+	<!-- Karma Bottom 10 -->
+	<div class="col-lg-4">
+		<div class="widget h-100">
+			<div class="">
+				<div class="card-body">
+					<h5 class="card-title text-center">Latest URLs</h5>
+					<ul class="list-group">
+					<%= for u <- @urls do %>
+					<li class="d-flex justify-content-between align-items-center">
+					<span class="url">
+					<a href="<%= raw(u.url) %>">
+					<%= u.url %>
+					</a>
+					</span>
+					</li>
+					<% end %>
+					</ul>
+				</div><!-- card body -->
+			</div><!-- card -->
+		</div><!-- widget -->
+	</div><!-- col -->
 </div>
-
-<!-- Activity Chart -->
-<div class="row m-4" phx-update="ignore">
-  <div class="col-lg-6">
-    <div class="cardy round">
-      <canvas id="dailyChart"></canvas>
-    </div>
-  </div>
-  <div class="col-lg-6">
-    <div class="cardy round">
-      <canvas id="hourlyChart"></canvas>
-    </div>
-  </div>
-</div>
-
-<script>
-  var dailyData = {
-    labels: ['1 Feb', '2 Feb', '3 Feb', '4 Feb', '5 Feb', '6 Feb', '7 Feb'],
-    datasets: [{
-      label: 'Messages',
-      backgroundColor: "pink",
-      borderColor: "red",
-      borderWidth: 1,
-      data: [
-        12, 13, 14, 32, 2, 4, 18, 19
-      ]
-    }]
-  };
-
-  var hourlyData = {
-    labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23'],
-    datasets: [{
-      label: 'Messages',
-      backgroundColor: "pink",
-      borderColor: "red",
-      borderWidth: 1,
-      data: [
-        4.7, 2.7, 1.7, 1.1, 0.6, 0.4, 0.5, 0.8, 1.7, 2.9, 3.8, 4.3, 5.2, 5.8, 6.0, 5.7, 5.9, 5.9, 6.1, 6.8, 7.2, 7.2, 6.4]
-    }]
-  };
-
-
-  window.onload = function () {
-    // Daily chart
-    var ctx = document.getElementById('dailyChart').getContext('2d');
-    window.myBar = new Chart(ctx, {
-      type: 'bar',
-      data: dailyData,
-      options: {
-        responsive: true,
-        scales: {
-          xAxes: [{
-						display: true,
-						scaleLabel: {
-							display: true,
-							labelString: 'Date'
-						},
-            gridLines: { display: false}
-					}],
-          yAxes: [{
-            gridLines: {
-              display: false
-            },
-            display: true,
-						scaleLabel: {
-							display: true,
-							labelString: '# of Messages'
-						},
-          }]
-        }
-      }
-    });
-
-    // Hourly chart
-    var ctx = document.getElementById('hourlyChart').getContext('2d');
-    window.myBar = new Chart(ctx, {
-      type: 'bar',
-      data: hourlyData,
-      options: {
-        responsive: true,
-        scales: {
-          xAxes: [{
-						display: true,
-						scaleLabel: {
-							display: true,
-							labelString: 'Hour of Day'
-						},
-            gridLines: { display: false}
-					}],
-          yAxes: [{
-            gridLines: {
-              display: false
-            },
-            display: true,
-						scaleLabel: {
-							display: true,
-							labelString: '% of Messages'
-						},
-          }]
-        }
-      }
-    });
-
-  };
-</script>

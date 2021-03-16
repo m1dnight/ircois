@@ -16,15 +16,15 @@ defmodule IrcoisWeb.PageLive do
     socket = assign(socket, :messages, messages)
 
     # Karma top 10
-    karma_top_10 = Ircois.Data.karma_top(10)
+    karma_top_10 = Ircois.Data.karma_top(3)
     socket = assign(socket, :karma_top_10, karma_top_10)
 
     # Karma bottom 10
-    karma_bottom_10 = Ircois.Data.karma_bottom(10)
+    karma_bottom_10 = Ircois.Data.karma_bottom(3)
     socket = assign(socket, :karma_bottom_10, karma_bottom_10)
 
     # URLS
-    urls = Ircois.Data.last_n_urls(12)
+    urls = Ircois.Data.last_n_urls(3)
     socket = assign(socket, :urls, urls)
 
     socket = assign(socket, :channel, default_channel)
@@ -32,6 +32,7 @@ defmodule IrcoisWeb.PageLive do
   end
 
   def handle_info({:new_message, message}, socket) do
+    IO.puts "New message"
     # Last n messages
     messages = Ircois.Data.get_last_n(socket.assigns.channel, 10) |> color_nicknames()
 
