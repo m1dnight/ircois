@@ -10,6 +10,8 @@ user_count = 5
 message_count = 100
 nick_length = 7
 message_length = 3
+karma_increments = 100
+url_count = 100
 channel = "#infogroep"
 
 # Helper functions.
@@ -24,9 +26,22 @@ gen_nick = fn ->
 end
 
 gen_message = fn ->
-  String.split(" ")
+  words
+  |> String.split(" ")
+  |> Enum.shuffle()
   |> Enum.take(message_length)
-  |> Enum.concat()
+  |> Enum.join(" ")
+end
+
+gen_url = fn ->
+  str =
+    words
+  |> String.split(" ")
+  |> Enum.shuffle()
+  |> Enum.take(message_length)
+  |> Enum.join()
+
+  "https://#{str}.com"
 end
 
 
@@ -48,6 +63,21 @@ messages =
 messages
 |> Enum.map(fn message ->
   random_nick = Enum.random(nicknames)
-  res = Ircois.Data.store_message(%{:from => random_nick, :content => message, :channel => channel})
-  IO.inspect res
+  {:ok, _} = Ircois.Data.store_message(%{:from => random_nick, :content => message, :channel => channel})
+end)
+
+# Insert some random karma
+1..karma_increments
+|> Enum.each(fn _ ->
+  random_nick = Enum.random(nicknames)
+  delta = Enum.random([-1, 1])
+  {:ok, _} = Ircois.Data.add_karma(random_nick, delta)
+end)
+
+# Insert some random urls.
+1..url_count
+|> Enum.each(fn _ ->
+  random_url = gen_url.()
+  random_nick = Enum.random(nicknames)
+  {:ok, _} = Ircois.Data.store_url(%{:from => random_nick, :url => random_url})
 end)
