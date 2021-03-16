@@ -9,6 +9,7 @@ defmodule Ircois.Data do
   def store_message(attrs) do
     attrs = Map.put(attrs, :when, now_tz())
 
+    IO.inspect attrs
     struct(Message)
     |> Message.changeset(attrs)
     |> Repo.insert()

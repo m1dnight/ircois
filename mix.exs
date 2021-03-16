@@ -51,7 +51,8 @@ defmodule Ircois.MixProject do
       {:poison, "~> 4.0"},
       {:tz, "~> 0.10.0"},
       {:httpoison, "~> 1.7"},
-      {:number, "~> 1.0.1"}
+      {:number, "~> 1.0.1"},
+      {:elixilorem, "~> 0.0.1", only: :dev}
     ]
   end
 
