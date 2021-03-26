@@ -6,17 +6,12 @@ defmodule Supervisor.Bot do
   end
 
   def init(client_name) do
-    children = [
-      worker(Bot.Logger, [client_name]),
-      worker(Bot.Ohai, [client_name]),
-      # worker(Bot.Pedantic, [client_name]),
-      worker(Bot.Karma, [client_name]),
-      # worker(Bot.Parentheses, [client_name]),
-      # worker(Bot.Sentiment, [client_name]),
-      worker(Bot.UwMoeder, [client_name]),
-      worker(Bot.Bitcoin, [client_name])
-      # worker(Bot.Seen, [client_name])
-    ]
+    children =
+      Ircois.Config.read_config("config.json")
+      |> Map.get(:modules)
+      |> Enum.map(fn module ->
+        worker(module, [client_name])
+      end)
 
     Supervisor.init(children, strategy: :one_for_one)
   end

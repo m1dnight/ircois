@@ -6,7 +6,8 @@ defmodule Ircois.Config do
             server: nil,
             user: nil,
             client: nil,
-            coinmarketcap: nil
+            coinmarketcap: nil,
+            modules: []
 
   require Logger
 
@@ -17,7 +18,9 @@ defmodule Ircois.Config do
       password: "supersecret",
       port: 1234,
       server: "irc.example.com",
-      user: "irCois The Second"
+      user: "irCois The Second",
+      modules: [Bot.Logger, Bot.Ohai, Bot.Karma, Bot.UwMoeder, Bot.Bitcoin],
+      coinmarketcap: "putapikeyhere"
     }
   end
 
@@ -33,6 +36,7 @@ defmodule Ircois.Config do
             map
             |> Enum.map(fn {k, v} -> {String.to_atom(k), v} end)
             |> Enum.into(%{})
+            |> Map.update(:modules, [], fn ms -> Enum.map(ms, &String.to_atom/1) end)
 
           struct(__MODULE__, map)
         else
