@@ -26,7 +26,6 @@ defmodule Ircois.Data do
         limit: ^n
 
     Repo.all(query)
-    |> Enum.reverse()
   end
 
   def message_count_per_day(channel) do
@@ -56,6 +55,7 @@ defmodule Ircois.Data do
       tz_day = DateTime.shift_zone!(d, Application.get_env(:ircois, :timezone))
       %{total: t, day: tz_day, utc: d}
     end)
+    |> Enum.sort_by(fn d -> d.day end)
   end
 
   def message_count_per_hour(channel) do
@@ -86,6 +86,7 @@ defmodule Ircois.Data do
       tz_hour = DateTime.shift_zone!(h, Application.get_env(:ircois, :timezone))
       %{total: t, hour: tz_hour, utc: h}
     end)
+    |> Enum.sort_by(fn d -> d.hour end)
   end
 
   ##############################################################################
