@@ -6,7 +6,7 @@ defmodule IrcoisWeb.PageLive do
   @impl true
   def mount(_params, _session, socket) do
     Logger.debug("Socket mounted #{inspect(socket, pretty: true)} #{inspect(self())}")
-    default_channel = "#ircois"
+    default_channel = "#infogroep"
 
     # Subscribe to updates from the channel.
     PubSub.subscribe()
@@ -26,6 +26,12 @@ defmodule IrcoisWeb.PageLive do
     # URLS
     urls = Ircois.Data.last_n_urls(3)
     socket = assign(socket, :urls, urls)
+
+    # Activity
+    day_totals = Ircois.Data.message_count_per_day(default_channel)
+    hour_totals = Ircois.Data.message_count_per_hour(default_channel)
+    socket = assign(socket, :day_totals, day_totals)
+    socket = assign(socket, :hour_totals, hour_totals)
 
     socket = assign(socket, :channel, default_channel)
     {:ok, socket}
@@ -62,6 +68,53 @@ defmodule IrcoisWeb.PageLive do
     datetime
     |> DateTime.to_time()
     |> Time.to_string()
+  end
+
+  def hour_totals_labels(hourtotals) do
+    hourtotals
+    |> Enum.map(fn %{hour: hour} ->
+      hour
+    end)
+    |> Enum.map(&labels_hour/1)
+    |> Jason.encode!()
+  end
+
+  def hour_totals_values(hourtotals) do
+    hourtotals
+    |> Enum.map(fn %{total: t} ->
+      t
+    end)
+    |> Jason.encode!()
+  end
+
+
+  def day_totals_labels(daytotals) do
+    daytotals
+    |> Enum.map(fn %{day: day} ->
+      day
+    end)
+    |> Enum.map(&labels_day/1)
+    |> Jason.encode!()
+  end
+
+  def day_totals_values(daytotals) do
+    daytotals
+    |> Enum.map(fn %{total: t} ->
+      t
+    end)
+    |> Jason.encode!()
+  end
+
+  def labels_day(dt) do
+    day = "#{dt.day}"
+    month = "#{dt.month}" |> String.pad_leading(2, "0")
+    "#{day}/#{month}"
+  end
+
+  def labels_hour(dt) do
+    hour = "#{dt.hour}" |> String.pad_leading(2, "0")
+    minute = "#{dt.minute}" |> String.pad_leading(2, "0")
+    "#{hour}:#{minute}"
   end
 
   defp color_nicknames(messages) do

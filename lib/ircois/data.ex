@@ -6,26 +6,86 @@ defmodule Ircois.Data do
 
   ##############################################################################
   # Messages
-  def store_message(attrs) do
-    attrs = Map.put(attrs, :when, now_tz())
-
-    IO.inspect(attrs)
-
+  def store_message(attrs = %{:from => _, :content => _, :channel => _, :when => _}) do
     struct(Message)
     |> Message.changeset(attrs)
     |> Repo.insert()
     |> PubSub.notify_new_message()
   end
 
+  def store_message(%{:from => random_nick, :content => message, :channel => channel}) do
+    attrs = %{:from => random_nick, :content => message, :channel => channel, :when => now_tz()}
+    store_message(attrs)
+  end
+
   def get_last_n(channel, n \\ 10) do
     query =
       from m in Message,
-        order_by: [asc: m.when],
+        order_by: [desc: m.when],
         where: m.channel == ^channel,
         limit: ^n
 
     Repo.all(query)
     |> Enum.reverse()
+  end
+
+  def message_count_per_day(channel) do
+    subquery =
+      from m in Message,
+        select: %{
+          when_tz: fragment("(? AT TIME ZONE 'UTC')", m.when),
+          day_tz: fragment("date_trunc('day', (? AT TIME ZONE 'UTC'))", m.when)
+        },
+        where:
+          fragment(
+            "date_trunc('day', (? AT TIME ZONE 'UTC')) > (NOW() - interval ?)",
+            m.when,
+            "7 days"
+          )and m.channel == ^channel
+
+    query =
+      from m in subquery(subquery),
+        select: %{
+          total: fragment("count(*)"),
+          day: m.day_tz
+        },
+        group_by: fragment("day_tz")
+
+    Repo.all(query)
+    |> Enum.map(fn %{total: t, day: d} ->
+      tz_day = DateTime.shift_zone!(d, Application.get_env(:ircois, :timezone))
+      %{total: t, day: tz_day, utc: d}
+    end)
+  end
+
+  def message_count_per_hour(channel) do
+    subquery =
+      from m in Message,
+        select: %{
+          when_tz: fragment("(? AT TIME ZONE 'UTC')", m.when),
+          hour_tz: fragment("date_trunc('hour', (? AT TIME ZONE 'UTC'))", m.when)
+        },
+        where:
+          fragment(
+            "date_trunc('hour', (? AT TIME ZONE 'UTC')) > (NOW() - interval ?)",
+            m.when,
+            "1 days"
+          ) and m.channel == ^channel
+
+    query =
+      from m in subquery(subquery),
+        select: %{
+          total: fragment("count(*)"),
+          hour: m.hour_tz
+        },
+        group_by: fragment("hour_tz")
+
+
+    Repo.all(query)
+    |> Enum.map(fn %{total: t, hour: h} ->
+      tz_hour = DateTime.shift_zone!(h, Application.get_env(:ircois, :timezone))
+      %{total: t, hour: tz_hour, utc: h}
+    end)
   end
 
   ##############################################################################

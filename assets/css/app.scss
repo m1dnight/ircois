@@ -17,18 +17,22 @@ $light: rgb(223, 223, 223);
 
 // Add some space between the widgets on mobile view.
 @media (max-width: 991px) {
-	.col-lg-6 {
-		margin-bottom: 0.5rem !important;
-		border: 1px solid;
-	}
 	.col-lg-4 {
 		margin-bottom: 0.5rem !important;
-		border: 1px solid;
+		border: 0px solid;
+	}
+	.col-lg-6 {
+		margin-bottom: 0.5rem !important;
+		border: 0px solid;
 	}
 	.col-lg-12 {
 		margin-bottom: 0.5rem !important;
-		border: 1px solid;
+		border: 0px solid;
 	}
+}
+
+.col-lg-6 {
+	margin-top: 0.4rem !important;
 }
 
 body {
@@ -38,8 +42,8 @@ body {
 
 /* Widgets */
 .widget {
-	margin: 0.5rem !important;
-	// padding: 0.5rem !important;
+	margin: 0.2rem !important;
+	padding: 1rem !important;
 	background-color: $lightdark;
 }
 
