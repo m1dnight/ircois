@@ -1,5 +1,6 @@
 defmodule LoginHandler do
   require Logger
+
   @moduledoc """
   This is an example event handler that listens for login events and then
   joins the appropriate channels. We actually need this because we can't
@@ -18,9 +19,11 @@ defmodule LoginHandler do
 
   def handle_info(:logged_in, state = {client, config}) do
     Logger.debug("Logged in to server")
+
     config
     |> Map.get(:channels)
     |> Enum.map(&ExIRC.Client.join(client, &1))
+
     {:noreply, state}
   end
 

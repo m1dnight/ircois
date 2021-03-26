@@ -9,7 +9,8 @@ defmodule Ircois.Data do
   def store_message(attrs) do
     attrs = Map.put(attrs, :when, now_tz())
 
-    IO.inspect attrs
+    IO.inspect(attrs)
+
     struct(Message)
     |> Message.changeset(attrs)
     |> Repo.insert()
@@ -26,8 +27,6 @@ defmodule Ircois.Data do
     Repo.all(query)
     |> Enum.reverse()
   end
-
-
 
   ##############################################################################
   # URLs

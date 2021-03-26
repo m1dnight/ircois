@@ -8,6 +8,5 @@ defmodule Ircois.Repo.Migrations.CreateBalance do
 
       timestamps()
     end
-
   end
 end

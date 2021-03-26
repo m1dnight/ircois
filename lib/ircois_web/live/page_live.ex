@@ -31,12 +31,12 @@ defmodule IrcoisWeb.PageLive do
     {:ok, socket}
   end
 
+  @impl true
   def handle_info({:new_message, _message}, socket) do
-    IO.puts "Sending new message to front-end"
+    Logger.debug("Sending new message to front-end")
     # Last n messages
     messages = Ircois.Data.get_last_n(socket.assigns.channel, 10) |> color_nicknames()
 
-    IO.inspect messages, label: "messages"
     socket = assign(socket, :messages, messages)
     {:noreply, socket}
   end

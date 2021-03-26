@@ -8,6 +8,5 @@ defmodule Ircois.Repo.Migrations.CreateKarma do
 
       timestamps()
     end
-
   end
 end

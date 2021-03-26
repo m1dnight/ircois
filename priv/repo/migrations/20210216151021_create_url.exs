@@ -9,6 +9,5 @@ defmodule Ircois.Repo.Migrations.CreateURL do
 
       timestamps()
     end
-
   end
 end

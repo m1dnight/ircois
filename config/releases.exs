@@ -66,4 +66,4 @@ debuglevel =
   System.get_env("DEBUG") ||
     false
 
-config :logger, level: if debuglevel, do: :debug, else: :info
+config :logger, level: if(debuglevel, do: :debug, else: :info)
