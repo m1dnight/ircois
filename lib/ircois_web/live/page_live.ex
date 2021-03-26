@@ -14,8 +14,10 @@ defmodule IrcoisWeb.PageLive do
     PubSub.subscribe()
 
     # Last n messages
-    messages = Ircois.Data.get_last_n(default_channel, 10) |> color_nicknames()
+    messages = Ircois.Data.get_last_n(default_channel, 10)
+    color_map = nick_color_map(messages)
     socket = assign(socket, :messages, messages)
+    socket = assign(socket, :color_map, color_map)
 
     # Karma top 10
     karma_top_10 = Ircois.Data.karma_top(10)
@@ -40,12 +42,16 @@ defmodule IrcoisWeb.PageLive do
   end
 
   @impl true
-  def handle_info({:new_message, _message}, socket) do
-    Logger.debug("Sending new message to front-end")
-    # Last n messages
-    messages = Ircois.Data.get_last_n(socket.assigns.channel, 10) |> color_nicknames()
+  def handle_info({:new_message, message}, socket) do
+    # Generate color map if the current user is not in there yet.
+    color_map = socket.assigns.color_map
+                |> Map.put_new(message.from, random_color())
+    socket = assign(socket, :color_map, color_map)
 
+    # Only keep the last n messages.
+    messages = socket.assigns.messages ++ [message] |> Enum.take(-10)
     socket = assign(socket, :messages, messages)
+
     {:noreply, socket}
   end
 
@@ -118,20 +124,17 @@ defmodule IrcoisWeb.PageLive do
     "#{hour}:#{minute}"
   end
 
-  defp color_nicknames(messages) do
-    :random.seed(:os.timestamp())
-
-    {_, messages} =
-      messages
-      |> Enum.reduce({%{}, []}, fn message, {colors, messages} ->
-        colors =
-          Map.put_new(colors, message.from, :rand.uniform(16_777_215) |> Integer.to_string(16))
-
-        color = Map.get(colors, message.from)
-        new_message = Map.put(message, :color, color)
-        {colors, [new_message | messages]}
-      end)
-
+  defp nick_color_map(messages) do
     messages
+    |> Enum.map(fn m -> m.from end)
+    |> Enum.uniq()
+    |> Enum.map(fn n ->
+      {n, random_color()}
+    end)
+    |> Enum.into(%{})
+  end
+
+  defp random_color() do
+    :rand.uniform(16_777_215) |> Integer.to_string(16)
   end
 end

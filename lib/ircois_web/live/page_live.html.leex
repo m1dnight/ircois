@@ -11,7 +11,7 @@
 					<%= for m <- @messages do %>
 					<tr class="timestamp">
 						<td class=""><%= show_time(m.when) %></td>
-						<td class="nickname" style="color: #<%= m.color %>;"><%= m.from %></td>
+						<td class="nickname" style="color: #<%= @color_map[m.from] %>;"><%= m.from %></td>
 						<td class="message"><%= m.content %></td>
 					</tr>
 					<% end %>
@@ -25,7 +25,7 @@
 <div class="row">
 	<!-- Karma Top 10 -->
 	<div class="col-lg-4">
-		<div class="widget h-100">
+		<div class="widget">
 			<div class="">
 				<div class="card-body">
 					<h5 class="card-title text-center">Karma Top 10</h5>
@@ -43,7 +43,7 @@
 	</div> <!-- col -->
 	<!-- Karma Bottom 10 -->
 	<div class="col-lg-4">
-		<div class="widget h-100">
+		<div class="widget">
 			<div class="">
 				<div class="card-body">
 					<h5 class="card-title text-center">Karma Bottom 10</h5>
@@ -61,7 +61,7 @@
 	</div><!-- col -->
 	<!-- Karma Bottom 10 -->
 	<div class="col-lg-4">
-		<div class="widget h-100">
+		<div class="widget">
 			<div class="">
 				<div class="card-body">
 					<h5 class="card-title text-center">Latest URLs</h5>
