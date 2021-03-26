@@ -6,7 +6,7 @@ defmodule IrcoisWeb.PageLive do
   @impl true
   def mount(_params, _session, socket) do
     Logger.debug("Socket mounted #{inspect(socket, pretty: true)} #{inspect(self())}")
-    default_channel = "#infogroep"
+    default_channel = "#ircois"
 
     # Subscribe to updates from the channel.
     PubSub.subscribe()
@@ -31,11 +31,12 @@ defmodule IrcoisWeb.PageLive do
     {:ok, socket}
   end
 
-  def handle_info({:new_message, message}, socket) do
-    IO.puts "New message"
+  def handle_info({:new_message, _message}, socket) do
+    IO.puts "Sending new message to front-end"
     # Last n messages
     messages = Ircois.Data.get_last_n(socket.assigns.channel, 10) |> color_nicknames()
 
+    IO.inspect messages, label: "messages"
     socket = assign(socket, :messages, messages)
     {:noreply, socket}
   end

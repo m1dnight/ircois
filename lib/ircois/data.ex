@@ -19,7 +19,7 @@ defmodule Ircois.Data do
   def get_last_n(channel, n \\ 10) do
     query =
       from m in Message,
-        order_by: [desc: m.when],
+        order_by: [asc: m.when],
         where: m.channel == ^channel,
         limit: ^n
 

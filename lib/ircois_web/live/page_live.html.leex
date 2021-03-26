@@ -1,5 +1,5 @@
 <!-- chatbox -->
-<div class="row m-4">
+<div class="row">
 	<div class="col-lg-12">
 		<div class="widget">
 			<table class="table chatbox">
@@ -18,7 +18,7 @@
 </div>
 
 <!-- Widgets -->
-<div class="row m-4">
+<div class="row">
 	<!-- Karma Top 10 -->
 	<div class="col-lg-4">
 		<div class="widget h-100">
@@ -77,3 +77,109 @@
 		</div><!-- widget -->
 	</div><!-- col -->
 </div>
+
+
+<!-- Activity Chart -->
+<div class="row" phx-update="ignore">
+  <div class="col-lg-6">
+    <div class="cardy round">
+      <canvas id="dailyChart"></canvas>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="cardy round">
+      <canvas id="hourlyChart"></canvas>
+    </div>
+  </div>
+</div>
+
+<script>
+  var dailyData = {
+    labels: ['1 Feb', '2 Feb', '3 Feb', '4 Feb', '5 Feb', '6 Feb', '7 Feb'],
+    datasets: [{
+      label: 'Messages',
+      backgroundColor: "pink",
+      borderColor: "red",
+      borderWidth: 1,
+      data: [
+        12, 13, 14, 32, 2, 4, 18, 19
+      ]
+    }]
+  };
+
+  var hourlyData = {
+    labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23'],
+    datasets: [{
+      label: 'Messages',
+      backgroundColor: "pink",
+      borderColor: "red",
+      borderWidth: 1,
+      data: [
+        4.7, 2.7, 1.7, 1.1, 0.6, 0.4, 0.5, 0.8, 1.7, 2.9, 3.8, 4.3, 5.2, 5.8, 6.0, 5.7, 5.9, 5.9, 6.1, 6.8, 7.2, 7.2, 6.4]
+    }]
+  };
+
+
+  window.onload = function () {
+    // Daily chart
+    var ctx = document.getElementById('dailyChart').getContext('2d');
+    window.myBar = new Chart(ctx, {
+      type: 'bar',
+      data: dailyData,
+      options: {
+        responsive: true,
+        scales: {
+          xAxes: [{
+						display: true,
+						scaleLabel: {
+							display: true,
+							labelString: 'Date'
+						},
+            gridLines: { display: false}
+					}],
+          yAxes: [{
+            gridLines: {
+              display: false
+            },
+            display: true,
+						scaleLabel: {
+							display: true,
+							labelString: '# of Messages'
+						},
+          }]
+        }
+      }
+    });
+
+    // Hourly chart
+    var ctx = document.getElementById('hourlyChart').getContext('2d');
+    window.myBar = new Chart(ctx, {
+      type: 'bar',
+      data: hourlyData,
+      options: {
+        responsive: true,
+        scales: {
+          xAxes: [{
+						display: true,
+						scaleLabel: {
+							display: true,
+							labelString: 'Hour of Day'
+						},
+            gridLines: { display: false}
+					}],
+          yAxes: [{
+            gridLines: {
+              display: false
+            },
+            display: true,
+						scaleLabel: {
+							display: true,
+							labelString: '% of Messages'
+						},
+          }]
+        }
+      }
+    });
+
+  };
+</script>
