@@ -6,7 +6,9 @@ defmodule IrcoisWeb.PageLive do
   @impl true
   def mount(_params, _session, socket) do
     Logger.debug("Socket mounted #{inspect(socket, pretty: true)} #{inspect(self())}")
-    default_channel = "#infogroep"
+    cfg = Ircois.Config.read_config("config.json")
+
+    default_channel = hd(cfg.channels)
 
     # Subscribe to updates from the channel.
     PubSub.subscribe()
