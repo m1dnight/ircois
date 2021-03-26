@@ -16,15 +16,15 @@ defmodule IrcoisWeb.PageLive do
     socket = assign(socket, :messages, messages)
 
     # Karma top 10
-    karma_top_10 = Ircois.Data.karma_top(3)
+    karma_top_10 = Ircois.Data.karma_top(10)
     socket = assign(socket, :karma_top_10, karma_top_10)
 
     # Karma bottom 10
-    karma_bottom_10 = Ircois.Data.karma_bottom(3)
+    karma_bottom_10 = Ircois.Data.karma_bottom(10)
     socket = assign(socket, :karma_bottom_10, karma_bottom_10)
 
     # URLS
-    urls = Ircois.Data.last_n_urls(3)
+    urls = Ircois.Data.last_n_urls(10)
     socket = assign(socket, :urls, urls)
 
     # Activity
