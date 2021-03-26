@@ -14,7 +14,7 @@ defmodule IrcoisWeb.PageLive do
     PubSub.subscribe()
 
     # Last n messages
-    messages = Ircois.Data.get_last_n(default_channel, 10)
+    messages = Ircois.Data.get_last_n(default_channel, 10) |> Enum.reverse()
     color_map = nick_color_map(messages)
     socket = assign(socket, :messages, messages)
     socket = assign(socket, :color_map, color_map)
