@@ -25,7 +25,12 @@ defmodule Ircois.Data do
         where: m.channel == ^channel,
         limit: ^n
 
+    tz = Application.get_env(:ircois, :timezone)
+
     Repo.all(query)
+    |> Enum.map(fn m ->
+      %{m | when: DateTime.shift_zone!(m.when, tz)}
+    end)
   end
 
   def message_count_per_day(channel) do
@@ -40,7 +45,7 @@ defmodule Ircois.Data do
             "date_trunc('day', (? AT TIME ZONE 'UTC')) > (NOW() - interval ?)",
             m.when,
             "7 days"
-          )and m.channel == ^channel
+          ) and m.channel == ^channel
 
     query =
       from m in subquery(subquery),
@@ -79,7 +84,6 @@ defmodule Ircois.Data do
           hour: m.hour_tz
         },
         group_by: fragment("hour_tz")
-
 
     Repo.all(query)
     |> Enum.map(fn %{total: t, hour: h} ->
