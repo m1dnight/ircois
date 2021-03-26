@@ -89,7 +89,6 @@ defmodule IrcoisWeb.PageLive do
     |> Jason.encode!()
   end
 
-
   def day_totals_labels(daytotals) do
     daytotals
     |> Enum.map(fn %{day: day} ->
