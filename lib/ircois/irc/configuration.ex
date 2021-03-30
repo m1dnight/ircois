@@ -1,4 +1,6 @@
 defmodule Ircois.Config do
+  require Logger
+
   defstruct channels: [],
             nickname: nil,
             password: nil,
@@ -9,23 +11,29 @@ defmodule Ircois.Config do
             coinmarketcap: nil,
             modules: []
 
-  require Logger
-
+  @doc """
+  Returns a default configuration file Elixir data structure.
+  """
   def default_config() do
     %Ircois.Config{
-      channels: ["#somechannel"],
-      nickname: "foobar",
-      password: "supersecret",
-      port: 1234,
-      server: "irc.example.com",
-      user: "irCois The Second",
-      modules: [Bot.Logger, Bot.Ohai, Bot.Karma, Bot.UwMoeder, Bot.Bitcoin],
+      channels: ["#ircois"],
+      nickname: "ircois",
+      password: "",
+      port: 6667,
+      server: "irc.freenode.net",
+      user: "Cois",
+      modules: [],
       coinmarketcap: "putapikeyhere"
     }
   end
 
-  def read_config(path) do
+  @doc """
+  Reads the configuration file from the disk.
+  """
+  def read_config() do
+    path = Application.get_env(:ircois, :config)
     full_path = Path.absname(path)
+
     Logger.debug("Reading config #{inspect(full_path)}")
 
     cond do
@@ -47,14 +55,17 @@ defmodule Ircois.Config do
 
       true ->
         Logger.error("Configuration file #{inspect(full_path)} does not exist, creating default.")
-        create_default_config("config.json")
+        create_default_config(path)
         default_config()
     end
   end
 
+  @doc """
+  Creates a default configuration file and writes it to disk.
+  """
   def create_default_config(path) do
     cfg = default_config() |> Poison.encode!()
-    full_path = Path.absname("config.json")
+    full_path = Path.absname(path)
     Logger.debug("Creating default configuration file #{inspect(full_path)}")
     File.write!(full_path, cfg)
   end

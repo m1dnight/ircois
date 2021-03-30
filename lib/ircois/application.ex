@@ -16,7 +16,7 @@ defmodule Ircois.Application do
       # Start the Endpoint (http/https)
       IrcoisWeb.Endpoint,
       # Start a worker by calling: Ircois.Worker.start_link(arg)
-      Supervisor.Connection
+      Ircois.Backend
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

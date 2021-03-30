@@ -6,7 +6,7 @@ defmodule IrcoisWeb.PageLive do
   @impl true
   def mount(_params, _session, socket) do
     Logger.debug("Socket mounted #{inspect(socket, pretty: true)} #{inspect(self())}")
-    cfg = Ircois.Config.read_config("config.json")
+    cfg = Ircois.Config.read_config()
 
     default_channel = hd(cfg.channels)
 

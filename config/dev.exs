@@ -77,3 +77,6 @@ config :phoenix, :plug_init_mode, :runtime
 
 # Timezone information.
 config :ircois, timezone: "Europe/Brussels"
+
+# Timezone information.
+config :ircois, config: "config.json"
