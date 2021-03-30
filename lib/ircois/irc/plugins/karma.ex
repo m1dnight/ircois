@@ -12,35 +12,27 @@ defmodule Ircois.Plugins.Karma do
     ]
   end
 
-  defstate do
-    %{}
-  end
 
   react ~r/!(?<sub>.+)(?<op>\+\+|--)/, e do
     r = Regex.named_captures(~r/!(?<sub>.+)(?<op>\+\+|--)/, e.message)
     delta = if r["op"] == "--", do: -1, else: 1
-    state = Map.update(e.state, r["sub"], delta, fn k -> k + delta end)
-    {:noreply, state}
+    Ircois.Data.add_karma(r["sub"], delta)
+    {:noreply, e.state}
   end
 
   react ~r/karma\s(?<sub>.+)/i, e do
     r = Regex.named_captures(~r/karma\s(?<sub>.+)/i, e.message)
+    karma = Ircois.Data.get_karma(r["sub"])
+    {:reply, "'#{r["sub"]}' has #{karma} karma points.", e.state}
 
-    if Map.has_key?(e.state, r["sub"]) do
-      {:reply, "'#{r["sub"]}' has #{Map.get(e.state, r["sub"])} karma points.", e.state}
-    else
-      {:reply, "'#{r["sub"]}' has 0 karma points.", e.state}
-    end
   end
 
   dm ~r/karmalist/i, e do
     responses =
-      e.state
-      |> Enum.to_list()
-      |> Enum.sort_by(fn {_s, k} -> k end)
-      |> Enum.take(15)
-      |> Enum.zip(1..Enum.count(e.state))
-      |> Enum.map(fn {{s, k}, i} -> "#{i}) #{s}: #{k} points" end)
+      Ircois.Data.karma_top(15)
+      |> Enum.sort_by(fn k -> k.karma end)
+      |> Enum.zip(1..15)
+      |> Enum.map(fn {k, i} -> "#{i}) #{k.subject}: #{k.karma} points" end)
       |> Enum.join("\n")
 
     {:reply, "Karma top 15\n#{responses}", e.state}

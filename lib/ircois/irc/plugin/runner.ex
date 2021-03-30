@@ -97,7 +97,7 @@ defmodule Ircois.Plugin.Runner do
       event = %{
         from: from,
         message: message,
-        channel: from,
+        channel: channel,
         captures: named_captures,
         state: state.module_state,
         config: state.config

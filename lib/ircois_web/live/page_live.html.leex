@@ -99,94 +99,118 @@
 
 <script>
   var dailyData = {
-    labels: JSON.parse(document.getElementById("daytotals").dataset.labels),
-    datasets: [{
-      label: 'Messages',
-      backgroundColor: "rgb(139, 139, 255)",
-      borderColor: "black",
-      borderWidth: 0,
-      data: JSON.parse(document.getElementById("daytotals").dataset.values)
-    }]
+      labels: JSON.parse(document.getElementById("daytotals").dataset.labels),
+      datasets: [{
+          label: 'Messages',
+          backgroundColor: "rgb(139, 139, 255)",
+          borderColor: "black",
+          borderWidth: 0,
+          data: JSON.parse(document.getElementById("daytotals").dataset.values)
+      }]
   };
 
   var hourlyData = {
-    labels: JSON.parse(document.getElementById("hourtotals").dataset.labels),
-    datasets: [{
-      label: 'Messages',
-      backgroundColor: "rgb(139, 139, 255)",
-      borderColor: "black",
-      borderWidth: 1,
-      data: JSON.parse(document.getElementById("hourtotals").dataset.values)
-    }]
+      labels: JSON.parse(document.getElementById("hourtotals").dataset.labels),
+      datasets: [{
+          label: 'Messages',
+          backgroundColor: "rgb(139, 139, 255)",
+          borderColor: "black",
+          borderWidth: 1,
+          data: JSON.parse(document.getElementById("hourtotals").dataset.values)
+      }]
   };
 
 
-  window.onload = function () {
-    // Daily chart
-    var ctx = document.getElementById('dailyChart').getContext('2d');
-    window.myBar = new Chart(ctx, {
-      type: 'line',
-      data: dailyData,
-	  filled: true,
-      options: {
-		elements: { point: {radius: 0}},
-		legend: { display: false },
-        responsive: true,
-        scales: {
-          xAxes: [{
-						display: true,
-						scaleLabel: {
-							display: true,
-							labelString: 'Date'
-						},
-            gridLines: { display: false}
-					}],
-          yAxes: [{
-            gridLines: {
-              display: false
-            },
-            display: true,
-						scaleLabel: {
-							display: true,
-							labelString: '# of Messages'
-						},
-          }]
-        }
-      }
-    });
+  window.onload = function() {
+      // Daily chart
+      var ctx = document.getElementById('dailyChart').getContext('2d');
+      window.myBar = new Chart(ctx, {
+          type: 'line',
+          data: dailyData,
+          filled: true,
+          options: {
+              elements: {
+                  point: {
+                      radius: 0
+                  }
+              },
+              legend: {
+                  display: false
+              },
+              responsive: true,
+              scales: {
+                  xAxes: [{
+                      display: true,
+                      scaleLabel: {
+                          display: true,
+                          labelString: 'Date'
+                      },
+                      gridLines: {
+                          display: false
+                      }
+                  }],
+                  yAxes: [{
+                      ticks: {
+                          precision: 0,
+                          beginAtZero: true
+                      },
+                      gridLines: {
+                          display: false
+                      },
+                      display: true,
+                      scaleLabel: {
+                          display: true,
+                          labelString: '# of Messages'
+                      },
+                  }]
+              }
+          }
+      });
 
-    // Hourly chart
-    var ctx = document.getElementById('hourlyChart').getContext('2d');
-    window.myBar = new Chart(ctx, {
-      type: 'line',
-	  filled: false,
-      data: hourlyData,
-      options: {
-		elements: { point: {radius: 0}},
-		legend: { display: false },
-        responsive: true,
-        scales: {
-          xAxes: [{
-						display: true,
-						scaleLabel: {
-							display: true,
-							labelString: 'Hour of Day'
-						},
-            gridLines: { display: false}
-					}],
-          yAxes: [{
-            gridLines: {
-              display: false
-            },
-            display: true,
-						scaleLabel: {
-							display: true,
-							labelString: '% of Messages'
-						},
-          }]
-        }
-      }
-    });
+      // Hourly chart
+      var ctx = document.getElementById('hourlyChart').getContext('2d');
+      window.myBar = new Chart(ctx, {
+          type: 'line',
+          filled: false,
+          data: hourlyData,
+          options: {
+              elements: {
+                  point: {
+                      radius: 0
+                  }
+              },
+              legend: {
+                  display: false
+              },
+              responsive: true,
+              scales: {
+                  xAxes: [{
+                      display: true,
+                      scaleLabel: {
+                          display: true,
+                          labelString: 'Hour of Day'
+                      },
+                      gridLines: {
+                          display: false
+                      }
+                  }],
+                  yAxes: [{
+                      ticks: {
+                          precision: 0,
+                          beginAtZero: true
+                      },
+                      gridLines: {
+                          display: false
+                      },
+                      display: true,
+                      scaleLabel: {
+                          display: true,
+                          labelString: '# of Messages'
+                      },
+                  }]
+              }
+          }
+      });
 
   };
 </script>

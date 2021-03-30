@@ -44,7 +44,7 @@ defmodule Ircois.Data do
           fragment(
             "date_trunc('day', (? AT TIME ZONE 'UTC')) > (NOW() - interval ?)",
             m.when,
-            "7 days"
+            "31 days"
           ) and m.channel == ^channel
 
     query =
