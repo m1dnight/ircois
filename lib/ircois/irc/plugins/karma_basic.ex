@@ -19,7 +19,7 @@ defmodule Ircois.Plugins.KarmaBasic do
     {:noreply, e.state}
   end
 
-  react ~r/karma\s(?<sub>.+)/i, e do
+  react ~r/^karma\s(?<sub>.+)/i, e do
     karma = Ircois.Data.get_karma(e.captures["sub"])
     {:reply, "'#{e.captures["sub"]}' has #{karma} karma points.", e.state}
 
