@@ -1,9 +1,9 @@
-defmodule Ircois.Plugins.Karma do
+defmodule Ircois.Plugins.KarmaBasic do
   use Ircois.Plugin.Macros
 
   help do
     [
-      {"!<subject> ++/--", "Increases (++) or decreases (--) the karma of <subject>."},
+      {"<subject>++/--", "Increases (++) or decreases (--) the karma of <subject>."},
       {
         "karma <subject>",
         "Prints the karma of <subject> in the main channel."
@@ -13,7 +13,7 @@ defmodule Ircois.Plugins.Karma do
   end
 
 
-  react ~r/!(?<sub>.+)(?<op>\+\+|--)/, e do
+  react ~r/(?<sub>[^\s]+)(\+\+|--)/, e do
     delta = if e.captures["op"] == "--", do: -1, else: 1
     Ircois.Data.add_karma(e.captures["sub"], delta)
     {:noreply, e.state}
