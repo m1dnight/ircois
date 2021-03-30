@@ -4,7 +4,7 @@ defmodule Ircois.Plugins.UwMoeder do
   react ~r/.*\sis\s(.+\s)?een(?<wat>(\s*[a-zA-Z]+\s*)+)/, e do
     wat = e.captures["wat"]
 
-    if :rand.uniform() > 0.0 do
+    if :rand.uniform() > 0.95 do
       w = String.trim(wat)
       {:reply, "Uw moeder is een #{w}.", e.state}
     else
