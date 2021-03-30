@@ -119,9 +119,11 @@ defmodule IrcoisWeb.PageLive do
   end
 
   def labels_hour(dt) do
+    day = "#{dt.day}"
+    month = "#{dt.month}" |> String.pad_leading(2, "0")
     hour = "#{dt.hour}" |> String.pad_leading(2, "0")
     minute = "#{dt.minute}" |> String.pad_leading(2, "0")
-    "#{hour}:#{minute}"
+    "#{day}/#{month} #{hour}:#{minute}"
   end
 
   defp nick_color_map(messages) do

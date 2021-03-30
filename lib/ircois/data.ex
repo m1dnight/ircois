@@ -72,9 +72,8 @@ defmodule Ircois.Data do
         },
         where:
           fragment(
-            "date_trunc('hour', (? AT TIME ZONE 'UTC')) > (((date_trunc('day', now())) + interval '24 hours' - interval '1 seconds') - interval ?)",
-            m.when,
-            "24 hours"
+            "? > (now() - interval '24 hours')",
+            m.when
           ) and m.channel == ^channel
 
     query =
