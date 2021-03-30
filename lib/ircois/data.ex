@@ -72,7 +72,7 @@ defmodule Ircois.Data do
         },
         where:
           fragment(
-            "? > (now() - interval '24 hours')",
+            "? > (now() - interval '48 hours')",
             m.when
           ) and m.channel == ^channel
 

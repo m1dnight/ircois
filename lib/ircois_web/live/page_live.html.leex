@@ -131,15 +131,21 @@
           options: {
               elements: {
                   point: {
-                      radius: 0
+                     // radius: 1
+					  bordercolor: "#8b8bff"
                   }
               },
               legend: {
-                  display: false
+                  display: true
               },
               responsive: true,
               scales: {
                   xAxes: [{
+					  					  ticks: {
+						                autoSkip: true,
+              maxRotation: 0,
+              minRotation: 0
+					  },
                       display: true,
                       scaleLabel: {
                           display: true,
@@ -176,7 +182,8 @@
           options: {
               elements: {
                   point: {
-                      radius: 0
+                      //radius: 0
+					  bordercolor: "#8b8bff"
                   }
               },
               legend: {
@@ -185,6 +192,11 @@
               responsive: true,
               scales: {
                   xAxes: [{
+					  ticks: {
+						                autoSkip: true,
+              maxRotation: 0,
+              minRotation: 0
+					  },
                       display: true,
                       scaleLabel: {
                           display: true,
