@@ -19,12 +19,12 @@ defmodule Ircois.Plugins.PageTitle do
   end
 
   def get_page_title(url) do
-    with {:ok, r = %{status_code: 200}} <- HTTPoison.get(url),
+    with {:ok, r = %{status_code: 200}} <- HTTPoison.get(url, [], [follow_redirect: true]),
          %{"title" => t} <- Regex.named_captures(~r/\<title\>(?<title>.+)<\/title\>/, r.body),
          clean <- t |> String.replace("\n", "") |> String.slice(0, 80) do
       clean
     else
-      _e -> nil
+      e -> e
     end
   end
 end
