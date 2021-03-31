@@ -24,7 +24,13 @@ defmodule Ircois.Config do
       server: "irc.freenode.net",
       user: "Cois",
       modules: [],
-      coinmarketcap: "putapikeyhere"
+      coinmarketcap: "putapikeyhere",
+      twitter: %{
+        "access_token" => "api key",
+        "access_token_secret" => "secret",
+        "consumer_key" => "consumer key",
+        "consumer_secret" => "consumer secret"
+      },
     }
   end
 
@@ -41,7 +47,6 @@ defmodule Ircois.Config do
       File.exists?(path) ->
         with {:ok, content} <- File.read(path),
              {:ok, map} <- Poison.decode(content) do
-              IO.inspect map
           map =
             map
             |> Enum.map(fn {k, v} -> {String.to_atom(k), v} end)
