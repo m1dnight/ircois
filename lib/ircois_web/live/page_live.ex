@@ -13,6 +13,14 @@ defmodule IrcoisWeb.PageLive do
     # Subscribe to updates from the channel.
     PubSub.subscribe()
 
+    # Loaded plugins
+    plugins =
+      Ircois.Plugin.Manager.registered_plugins()
+      |> Enum.map(&Atom.to_string/1)
+      |> Enum.map(&String.split(&1, "."))
+      |> Enum.map(&List.last/1)
+
+    socket = assign(socket, :plugins, plugins)
     # Last n messages
     messages = Ircois.Data.get_last_n(default_channel, 10) |> Enum.reverse()
     color_map = nick_color_map(messages)

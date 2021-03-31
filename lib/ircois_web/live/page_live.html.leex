@@ -2,6 +2,18 @@
 <span id="daytotals" data-labels='<%= raw(@day_totals |> day_totals_labels()) %>' data-values='<%= raw(@day_totals |> day_totals_values()) %>'></span>
 <span id="hourtotals" data-labels='<%= raw(@hour_totals |> hour_totals_labels()) %>' data-values='<%= raw(@hour_totals |> hour_totals_values()) %>'></span>
 
+<!-- Plugins -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="widget">
+            <%= for p <- @plugins do  %>
+                <span class="badge bg-success"><%= p %></span>
+            <% end %>
+        </div>
+    </div>
+</div>
+
+
 <!-- chatbox -->
 <div class="row">
 	<div class="col-lg-12">
