@@ -9,7 +9,8 @@ defmodule Ircois.Config do
             user: nil,
             client: nil,
             coinmarketcap: nil,
-            modules: []
+            modules: [],
+            twitter: %{}
 
   @doc """
   Returns a default configuration file Elixir data structure.
@@ -40,6 +41,7 @@ defmodule Ircois.Config do
       File.exists?(path) ->
         with {:ok, content} <- File.read(path),
              {:ok, map} <- Poison.decode(content) do
+              IO.inspect map
           map =
             map
             |> Enum.map(fn {k, v} -> {String.to_atom(k), v} end)

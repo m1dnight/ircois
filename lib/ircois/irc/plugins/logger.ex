@@ -7,7 +7,6 @@ defmodule Ircois.Plugins.Logger do
 
   react ~r/.*/, e do
     # Log messages.
-    IO.inspect e, label: "logger"
     Ircois.Data.store_message(%{:from => e.from, :content => e.message, :channel => e.channel})
 
     # Log urls.
