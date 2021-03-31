@@ -14,7 +14,7 @@ defmodule Inserter do
   @message_length 3
   @karma_increments 100
   @url_count 100
-  @channel "#infogroep"
+  @channel "#ircois"
 
   @days_back 14 * 86400
   @minutes_between_messages 15

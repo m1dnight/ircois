@@ -25,7 +25,7 @@ defmodule Ircois.Plugins.Karma do
 
   end
 
-  dm ~r/karmalist/i, e do
+  dm ~r/^karmalist/i, e do
     responses =
       Ircois.Data.karma_top(15)
       |> Enum.sort_by(fn k -> k.karma end)

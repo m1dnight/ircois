@@ -8,7 +8,7 @@ defmodule Ircois.Plugins.Help do
     ]
   end
 
-  react ~r/info\s(?<plugin>.+)/i, e do
+  hear ~r/^info\s(?<plugin>.+)/i, e do
     sub = e.captures["plugin"] |> String.downcase()
 
     plugins = Ircois.Plugin.Manager.registered_plugins()
@@ -36,7 +36,7 @@ defmodule Ircois.Plugins.Help do
     end
   end
 
-  react ~r/help/i, e do
+  hear ~r/^help/i, e do
     plugins = Ircois.Plugin.Manager.registered_plugins()
 
     human_readable =

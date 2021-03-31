@@ -15,14 +15,14 @@ defmodule Ircois.Plugins.Remember do
     %{}
   end
 
-  react ~r/remember (?<sub>.+) is (?<exp>.+)/i, e do
+  react ~r/^remember ((")?(?<sub>.+)(?(1)\1|)) is (?<exp>.+)/i, e do
     sub = e.captures["sub"]
     exp = e.captures["exp"]
     state = Map.put(e.state, sub, exp)
     {:reply, "I noted that '#{sub}' is '#{exp}'", state}
   end
 
-  react ~r/(?<sub>.+)\?/, e do
+  react ~r/^(?<sub>.+)\?/, e do
     sub = e.captures["sub"]
 
     if Map.has_key?(e.state, sub) do

@@ -1,7 +1,11 @@
 defmodule Ircois.Plugins.Logger do
   use Ircois.Plugin.Macros
 
-  react ~r/.*/i, e do
+  help do
+    {"Logger", "Logs all the messages and shows them through the webinterface."}
+  end
+
+  react ~r/.*/, e do
     # Log messages.
     IO.inspect e, label: "logger"
     Ircois.Data.store_message(%{:from => e.from, :content => e.message, :channel => e.channel})

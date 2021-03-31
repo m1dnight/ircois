@@ -37,6 +37,16 @@ defmodule Ircois.Plugin.Macros do
     end
   end
 
+  #############################################################################
+  # React to both dm's and public messages.
+  defmacro hear(regex, event_var, do: action_block) do
+    quote do
+      dm(unquote(regex), unquote(event_var), do: unquote(action_block))
+
+      react(unquote(regex), unquote(event_var), do: unquote(action_block))
+    end
+  end
+
   ##############################################################################
   # dm reacts to an incoming private message.
 
