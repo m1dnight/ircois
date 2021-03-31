@@ -1,5 +1,6 @@
 defmodule Ircois.Plugins.Karma do
   use Ircois.Plugin.Macros
+  require Logger
 
   help do
     [
@@ -13,8 +14,9 @@ defmodule Ircois.Plugins.Karma do
   end
 
 
-  react ~r/!(?<sub>.+)(?<op>\+\+|--)/, e do
+  react ~r/[ \t]*!(?<sub>.+)(?<op>\+\+|--)[ \t]*/, e do
     delta = if e.captures["op"] == "--", do: -1, else: 1
+    Logger.debug "Increasing karma for #{e.captures["sub"]} by #{delta}"
     Ircois.Data.add_karma(e.captures["sub"], delta)
     {:noreply, e.state}
   end
@@ -25,7 +27,7 @@ defmodule Ircois.Plugins.Karma do
 
   end
 
-  dm ~r/^karmalist/i, e do
+  dm ~r/^[ \t]*karmalist[ \t]*$/i, e do
     responses =
       Ircois.Data.karma_top(15)
       |> Enum.sort_by(fn k -> k.karma end)

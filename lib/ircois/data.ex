@@ -134,8 +134,6 @@ defmodule Ircois.Data do
     s = Repo.one(from m in Karma, where: m.subject == ^subject)
 
     if s != nil do
-      IO.puts("Updating existing karma #{inspect(subject)}")
-
       Ecto.Changeset.change(s, karma: s.karma + delta)
       |> Repo.update()
       |> PubSub.notify_karma_update()
