@@ -20,6 +20,10 @@ defmodule IrcoisWeb.PageLive do
       |> Enum.map(&String.split(&1, "."))
       |> Enum.map(&List.last/1)
 
+    # Most active users.
+    users = Ircois.Data.most_active(default_channel)
+    socket = assign(socket, :most_active, users)
+
     socket = assign(socket, :plugins, plugins)
     # Last n messages
     messages = Ircois.Data.get_last_n(default_channel, 10) |> Enum.reverse()

@@ -92,6 +92,18 @@ defmodule Ircois.Data do
     |> Enum.sort_by(fn d -> d.hour end)
   end
 
+  def most_active(channel) do
+    q =
+      from m in Message,
+        select: [m.from, count()],
+        where: m.channel == ^channel,
+        group_by: m.from,
+        order_by: [desc: count()],
+        limit: 10
+
+    Repo.all(q)
+  end
+
   ##############################################################################
   # URLs
   def store_url(attrs) do
