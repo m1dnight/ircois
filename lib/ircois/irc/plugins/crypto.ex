@@ -11,7 +11,7 @@ defmodule Ircois.Plugins.Crypto do
     ]
   end
 
-  hear ~r/^!btc.*/i, e do
+  hear ~r/^!btc/i, e do
     response = get_values(e.config.coinmarketcap)
     {:reply, response, e.state}
   end
