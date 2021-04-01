@@ -4,12 +4,12 @@ defmodule Ircois.Plugins.Karma do
 
   help do
     [
-      {"!<subject> ++/--", "Increases (++) or decreases (--) the karma of <subject>."},
+      {"`!<subject> ++/--`", "Increases (++) or decreases (--) the karma of <subject>."},
       {
-        "karma <subject>",
+        "`karma <subject>`",
         "Prints the karma of <subject> in the main channel."
       },
-      {"karmalist", "Prints out the top 15 of karma points in a private message."}
+      {"`karmalist`", "Prints out the top 15 of karma points in a private message."}
     ]
   end
 

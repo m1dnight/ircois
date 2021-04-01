@@ -4,10 +4,10 @@ defmodule Ircois.Plugins.Remember do
   help do
     [
       {
-        "remember <subject> is <value>",
+        "`remember <subject> is <value>`",
         "Remembers that <subject> is <value>."
       },
-      {"<subject>?", "If <subject> is a known alias, prints out its value."}
+      {"`<subject>?`", "If <subject> is a known alias, prints out its value."}
     ]
   end
 

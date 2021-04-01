@@ -4,7 +4,7 @@ defmodule Ircois.Plugins.Help do
   help do
     [
       {"`help`", "Prints out the help for all loaded plugins."},
-      {"info <plugin>", "Show the specific commands for <plugin>"}
+      {"`info <plugin>`", "Show the specific commands for <plugin>."}
     ]
   end
 
@@ -36,7 +36,7 @@ defmodule Ircois.Plugins.Help do
     end
   end
 
-  hear ~r/^[ \t]+help[ \t]+$/i, e do
+  hear ~r/^[ \t]*help[ \t]*$/i, e do
     plugins = Ircois.Plugin.Manager.registered_plugins()
 
     human_readable =

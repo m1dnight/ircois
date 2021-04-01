@@ -3,7 +3,7 @@ defmodule Ircois.Plugins.Tweets do
 
   help do
     [
-      {"/", "Prints out the contents of Twitter links."}
+      {"`*`", "Prints out the contents of Twitter links."}
     ]
   end
 

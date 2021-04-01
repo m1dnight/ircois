@@ -4,12 +4,12 @@ defmodule Ircois.Plugins.KarmaBasic do
 
   help do
     [
-      {"<subject>++/--", "Increases (++) or decreases (--) the karma of <subject>."},
+      {"`<subject>++/--`", "Increases (++) or decreases (--) the karma of <subject>."},
       {
-        "karma <subject>",
+        "`karma <subject>`",
         "Prints the karma of <subject> in the main channel."
       },
-      {"karmalist", "Prints out the top 15 of karma points in a private message."}
+      {"`karmalist`", "Prints out the top 15 of karma points in a private message."}
     ]
   end
 
@@ -26,7 +26,7 @@ defmodule Ircois.Plugins.KarmaBasic do
     {:reply, "'#{e.captures["sub"]}' has #{karma} karma points.", e.state}
   end
 
-  dm ~r/^[ \t]*karmalist[ \t]*/i, e do
+  dm ~r/^[ \t]*karma[ \t]*list[ \t]*/i, e do
     responses =
       Ircois.Data.karma_top(15)
       |> Enum.sort_by(fn k -> k.karma end)

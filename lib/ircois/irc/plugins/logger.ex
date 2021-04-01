@@ -2,7 +2,7 @@ defmodule Ircois.Plugins.Logger do
   use Ircois.Plugin.Macros
 
   help do
-    {"Logger", "Logs all the messages and shows them through the webinterface."}
+    {"*", "Logs all the messages and shows them through the webinterface."}
   end
 
   react ~r/.*/, e do

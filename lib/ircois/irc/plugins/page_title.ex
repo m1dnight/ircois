@@ -3,7 +3,7 @@ defmodule Ircois.Plugins.PageTitle do
 
   help do
     [
-      {"/", "Prints out the page title of pasted links."}
+      {"`*`", "Prints out the page title of pasted links."}
     ]
   end
 
