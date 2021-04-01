@@ -10,7 +10,8 @@ defmodule Ircois.Config do
             client: nil,
             coinmarketcap: nil,
             modules: [],
-            twitter: %{}
+            twitter: %{},
+            alphavantage: nil
 
   @doc """
   Returns a default configuration file Elixir data structure.
@@ -31,6 +32,7 @@ defmodule Ircois.Config do
         "consumer_key" => "consumer key",
         "consumer_secret" => "consumer secret"
       },
+      alphavantage: "apikeyhere"
     }
   end
 
