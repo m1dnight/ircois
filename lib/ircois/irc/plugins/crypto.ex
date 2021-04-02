@@ -5,7 +5,8 @@ defmodule Ircois.Plugins.Crypto do
   help do
     [
       {
-        "`!btc`", "Prints the current value of Bitcoin, Litecoin, and Ethereum."
+        "`!btc`",
+        "Prints the current value of Bitcoin, Litecoin, and Ethereum."
       }
     ]
   end

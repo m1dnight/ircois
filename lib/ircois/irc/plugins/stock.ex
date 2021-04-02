@@ -28,7 +28,7 @@ defmodule Ircois.Plugins.Stonks do
          _sym <- Map.get(data, "01. symbol"),
          {qot, ""} <- Map.get(data, "05. price") |> Float.parse(),
          qot <- Float.floor(qot, 2) |> Number.Currency.number_to_currency(unit: ""),
-         {chg, ""} <- Map.get(data, "09. change") |> Float.parse() ,
+         {chg, ""} <- Map.get(data, "09. change") |> Float.parse(),
          chg <- Float.floor(chg, 2),
          dat <- Map.get(data, "07. latest trading day"),
          {curr, name} <- get_meta_data(symbol) do

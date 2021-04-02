@@ -13,6 +13,7 @@ defmodule Ircois.Plugins.Logger do
     for url <- filter_url(e.message) do
       Ircois.Data.store_url(%{:from => e.from, :url => url})
     end
+
     {:noreply, e.state}
   end
 

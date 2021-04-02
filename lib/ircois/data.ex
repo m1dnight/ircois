@@ -157,11 +157,16 @@ defmodule Ircois.Data do
     end
   end
 
-  def karma_top(n \\ 10) do
+  def karma_top(n \\ nil) do
     query =
-      from m in Karma,
-        order_by: [desc: m.karma],
-        limit: ^n
+      if n do
+        from m in Karma,
+          order_by: [desc: m.karma],
+          limit: ^n
+      else
+        from m in Karma,
+          order_by: [desc: m.karma]
+      end
 
     Repo.all(query)
   end

@@ -56,12 +56,14 @@ defmodule IrcoisWeb.PageLive do
   @impl true
   def handle_info({:new_message, message}, socket) do
     # Generate color map if the current user is not in there yet.
-    color_map = socket.assigns.color_map
-                |> Map.put_new(message.from, random_color())
+    color_map =
+      socket.assigns.color_map
+      |> Map.put_new(message.from, random_color())
+
     socket = assign(socket, :color_map, color_map)
 
     # Only keep the last n messages.
-    messages = socket.assigns.messages ++ [message] |> Enum.take(-10)
+    messages = (socket.assigns.messages ++ [message]) |> Enum.take(-10)
     socket = assign(socket, :messages, messages)
 
     {:noreply, socket}

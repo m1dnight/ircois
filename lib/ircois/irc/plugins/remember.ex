@@ -28,7 +28,7 @@ defmodule Ircois.Plugins.Remember do
     if Map.has_key?(e.state, sub) do
       {:reply, "#{sub} is '#{Map.get(e.state, sub)}'", e.state}
     else
-      IO.puts "Key: `#{sub}` not found in #{inspect e.state}"
+      IO.puts("Key: `#{sub}` not found in #{inspect(e.state)}")
       {:noreply, e.state}
     end
   end
