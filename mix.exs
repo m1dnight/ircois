@@ -54,7 +54,8 @@ defmodule Ircois.MixProject do
       {:number, "~> 1.0.1"},
       {:elixilorem, "~> 0.0.1", only: :dev},
       {:oauther, "~> 1.1"},
-      {:extwitter, "~> 0.12"}
+      {:extwitter, "~> 0.12"},
+      {:timex, "~> 3.6"}
     ]
   end
 
