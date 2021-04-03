@@ -12,7 +12,7 @@ defmodule Ircois.Plugins.Stonks do
   end
 
   hear ~r/^[ \t]*\$(?<sym>.+)[ \t]*/i, e do
-    response = get_values(e.config.coinmarketcap)
+    response = get_values(e.captures["sym"])
     {:reply, response, e.state}
   end
 
