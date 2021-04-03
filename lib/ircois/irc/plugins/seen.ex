@@ -4,7 +4,7 @@ defmodule Ircois.Plugins.Seen do
 
   help do
     [
-      {"`seen <nickname>`", "Prints out the last message and time by <nickname> ."},
+      {"`seen <nickname>`", "Prints out the last message and time by <nickname> ."}
     ]
   end
 
@@ -24,10 +24,10 @@ defmodule Ircois.Plugins.Seen do
     case Ircois.Data.last_seen(e.channel, e.captures["sub"]) do
       nil ->
         {:reply, "Haven't seen that person.", e.state}
+
       m ->
-        {:reply, "#{m.from} was last seen around #{m.when |> Timex.format!("{RFC1123}")}", e.state}
+        {:reply, "#{m.from} was last seen around #{m.when |> Timex.format!("{RFC1123}")}",
+         e.state}
     end
-
   end
-
 end
