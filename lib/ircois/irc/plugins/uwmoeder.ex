@@ -1,14 +1,10 @@
 defmodule Ircois.Plugins.UwMoeder do
   use Ircois.Plugin.Macros
 
-  react ~r/.*\sis\s(.+\s)?een(?<wat>(\s*[a-zA-Z]+\s*)+)/, e do
+  react ~r/.*\sis\s(.+\s)?een(?<wat>(\s*[a-zA-Z]+\s*)+)/, e, probability: 0.05 do
     wat = e.captures["wat"]
 
-    if :rand.uniform() > 0.95 do
-      w = String.trim(wat)
-      {:reply, "Uw moeder is een #{w}.", e.state}
-    else
-      {:noreply, e.state}
-    end
+    w = String.trim(wat)
+    {:reply, "Uw moeder is een #{w}.", e.state}
   end
 end

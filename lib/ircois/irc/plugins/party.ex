@@ -10,7 +10,7 @@ defmodule Ircois.Plugins.Party do
     ]
   end
 
-  hear ~r/^[\W \t]*(\W*)feest(je)*[ \t\W]*/i, e do
+  react ~r/^[\W \t]*(\W*)feest(je)*[ \t\W]*/i, e, probability: 0.5 do
     {:reply, "💃🎉🎊🥳💥", e.state}
   end
 end
