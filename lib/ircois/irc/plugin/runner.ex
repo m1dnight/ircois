@@ -92,9 +92,9 @@ defmodule Ircois.Plugin.Runner do
     f = react.func
     o = react.opts
 
-    p = 1.0 - Keyword.get(o, :probability, 0.0)
+    p = 1.0 - Keyword.get(o, :probability, 1.0)
 
-    if :rand.uniform() > p and Regex.match?(r, message) do
+    if :rand.uniform() >= p and Regex.match?(r, message) do
       named_captures = Regex.named_captures(r, message)
 
       event = %{
@@ -141,9 +141,9 @@ defmodule Ircois.Plugin.Runner do
 
     from = sender.nick
 
-    p = 1.0 - Keyword.get(o, :probability, 0.0)
+    p = 1.0 - Keyword.get(o, :probability, 1.0)
 
-    if :rand.uniform() > p and Regex.match?(r, message) do
+    if :rand.uniform() >= p and Regex.match?(r, message) do
       named_captures = Regex.named_captures(r, message)
 
       event = %{
