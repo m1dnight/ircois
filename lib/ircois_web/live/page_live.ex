@@ -86,6 +86,10 @@ defmodule IrcoisWeb.PageLive do
     {:noreply, socket}
   end
 
+  def handle_info(_m, socket) do
+    {:noreply, socket}
+  end
+
   defp show_time(datetime) do
     datetime
     |> DateTime.to_time()

@@ -1,5 +1,6 @@
 defmodule Ircois.Plugins.Remember do
   use Ircois.Plugin.Macros
+  alias Ircois.Data
 
   help do
     [
@@ -18,18 +19,19 @@ defmodule Ircois.Plugins.Remember do
   react ~r/^[ \t]*remember (?<sub>.+) is (?<exp>.+)[ \t]*/i, e do
     sub = e.captures["sub"]
     exp = e.captures["exp"]
-    state = Map.put(e.state, sub, exp)
-    {:reply, "I noted that '#{sub}' is '#{exp}'", state}
+    Data.remember(sub, exp)
+    {:reply, "I noted that '#{sub}' is '#{exp}'", e.state}
   end
 
-  react ~r/^[ \t]*(?<sub>.+?)[ \t]*\?[ \t]*/, e do
+  react ~r/^[ \t]*what[ \t]*is[ \t]*(?<sub>.+?)[ \t]*\?[ \t]*/, e do
     sub = e.captures["sub"]
 
-    if Map.has_key?(e.state, sub) do
-      {:reply, "#{sub} is '#{Map.get(e.state, sub)}'", e.state}
-    else
-      IO.puts("Key: `#{sub}` not found in #{inspect(e.state)}")
-      {:noreply, e.state}
+    case Data.known?(sub) do
+      nil ->
+        {:noreply, e.state}
+
+      d ->
+        {:reply, "#{sub} is #{d}", e.state}
     end
   end
 end

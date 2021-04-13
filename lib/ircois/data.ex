@@ -1,5 +1,5 @@
 defmodule Ircois.Data do
-  alias Ircois.{Message, Karma, URL, Balance}
+  alias Ircois.{Message, Karma, URL, Balance, Fact}
   alias Ircois.Repo
   import Ecto.Query
   alias Ircois.PubSub
@@ -140,6 +140,38 @@ defmodule Ircois.Data do
 
     Repo.all(query)
     |> Enum.reverse()
+  end
+
+  #############################################################################
+  # Remembers
+
+  def remember(name, description) do
+    f = Repo.one(from f in Fact, where: f.name == ^name)
+
+    if f != nil do
+      Ecto.Changeset.change(f, description: description)
+      |> Repo.update()
+      |> PubSub.notify_fact_update()
+    else
+      struct(Fact)
+      |> Fact.changeset(%{:name => name, :description => description})
+      |> Repo.insert()
+      |> PubSub.notify_fact_update()
+    end
+  end
+
+  def known?(name) do
+    query =
+      from f in Fact,
+        where: f.name == ^name
+
+    case Repo.one(query) do
+      nil ->
+        nil
+
+      f ->
+        f.description
+    end
   end
 
   ##############################################################################

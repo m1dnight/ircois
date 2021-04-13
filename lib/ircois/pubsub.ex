@@ -23,6 +23,11 @@ defmodule Ircois.PubSub do
     {:ok, message}
   end
 
+  def notify_fact_update({:ok, message}) do
+    Phoenix.PubSub.broadcast(__MODULE__, @topic, {:new_fact, message})
+    {:ok, message}
+  end
+
   def notify_new_message({:error, err}) do
     {:error, err}
   end
