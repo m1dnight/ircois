@@ -45,7 +45,9 @@ defmodule Ircois.Plugins.KarmaBasic do
          url <- r.body do
       {:reply, url, e.state}
     else
-      _e -> {:reply, "An error occured!", e.state}
+      e ->
+        Logger.error inspect(e)
+        {:reply, "An error occured!", e.state}
     end
   end
 
