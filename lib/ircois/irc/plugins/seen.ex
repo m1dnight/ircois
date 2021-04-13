@@ -8,26 +8,33 @@ defmodule Ircois.Plugins.Seen do
     ]
   end
 
-  react ~r/[ \t]*!(?<sub>.+)(?<op>\+\+|--)[ \t]*/, e do
-    delta = if e.captures["op"] == "--", do: -1, else: 1
-    Logger.debug("Increasing karma for #{e.captures["sub"]} by #{delta}")
-    Ircois.Data.add_karma(e.captures["sub"], delta)
-    {:noreply, e.state}
-  end
-
-  react ~r/^karma\s(?<sub>.+)/i, e do
-    karma = Ircois.Data.get_karma(e.captures["sub"])
-    {:reply, "'#{e.captures["sub"]}' has #{karma} karma points.", e.state}
-  end
-
   hear ~r/^[ \t]*seen[ \t]*(?<sub>\w+)[ \t]*/i, e do
     case Ircois.Data.last_seen(e.channel, e.captures["sub"]) do
       nil ->
         {:reply, "Haven't seen that person.", e.state}
 
       m ->
-        {:reply, "#{m.from} was last seen around #{m.when |> Timex.format!("{RFC1123}")}",
-         e.state}
+        days = Timex.diff(Timex.now(), m.when, :days)
+        hours = Timex.diff(Timex.now(), m.when, :hours)
+        minutes = Timex.diff(Timex.now(), m.when, :minutes)
+        seconds = Timex.diff(Timex.now(), m.when, :seconds)
+
+        cond do
+          days > 0 ->
+            {:reply, "#{m.from} was last seen #{days} day(s) ago.", e.state}
+
+          hours > 0 ->
+            {:reply, "#{m.from} was last seen #{hours} hour(s) ago.", e.state}
+
+          minutes > 0 ->
+            {:reply, "#{m.from} was last seen #{minutes} minute(s) ago.", e.state}
+
+          seconds > 5 ->
+            {:reply, "#{m.from} was last seen #{seconds} second(s) ago.", e.state}
+
+          true ->
+            {:reply, "^ Look up.", e.state}
+        end
     end
   end
 end
