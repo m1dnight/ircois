@@ -1,7 +1,7 @@
 defmodule Ircois.Plugins.UwMoeder do
   use Ircois.Plugin.Macros
 
-  react ~r/.*\sis\s(.+\s)?een(?<wat>(\s*[a-zA-Z]+\s*)+)/, e, probability: 0.05 do
+  react ~r/.*\sis\s(.+\s)?een(?<wat>(\s*[a-zA-Z]+\s*)+)/, e, probability: 0.2 do
     wat = e.captures["wat"]
 
     w = String.trim(wat)
