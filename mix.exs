@@ -4,7 +4,7 @@ defmodule Ircois.MixProject do
   def project do
     [
       app: :ircois,
-      version: "0.3.1415926",
+      version: "0.3.14159265",
       elixir: "~> 1.7",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
