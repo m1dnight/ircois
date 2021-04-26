@@ -46,7 +46,7 @@ defmodule Ircois.Plugins.KarmaBasic do
       {:reply, url, e.state}
     else
       e ->
-        Logger.error inspect(e)
+        Logger.error(inspect(e))
         {:reply, "An error occured!", e.state}
     end
   end

@@ -16,7 +16,7 @@ defmodule IrcoisWeb.Router do
 
   scope "/", IrcoisWeb do
     pipe_through :browser
-
+    get "/user/:user", UserController, :user
     live "/", PageLive, :index
   end
 
