@@ -26,6 +26,7 @@ defmodule IrcoisWeb.UserView do
   end
 
   def format_datetime(nil), do: ""
+
   def format_datetime(dt) do
     Timex.format!(dt, "%d/%m/%Y %H:%M", :strftime)
   end

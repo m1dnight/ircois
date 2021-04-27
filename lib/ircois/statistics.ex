@@ -64,7 +64,7 @@ defmodule Ircois.Statistics do
     # Replace the total with the percentage.
     buckets
     |> Enum.map(&Map.update(&1, :total, 0.0, fn v -> v / total end))
-    |> Enum.map(&({&1.start, &1.total}))
+    |> Enum.map(&{&1.start, &1.total})
     |> Enum.into(%{})
     |> pad_buckets(1)
   end

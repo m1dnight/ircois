@@ -19,8 +19,7 @@ defmodule Ircois.Plugins.Stonks do
   def get_values(symbol) do
     api_key = Ircois.Config.read_config().alphavantage
 
-    url =
-      "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=#{symbol}&apikey=#{api_key}"
+    url = "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=#{symbol}&apikey=#{api_key}"
 
     with {:ok, r} <- HTTPoison.get(url),
          {:ok, json} <- r.body |> Poison.decode(),
@@ -41,10 +40,7 @@ defmodule Ircois.Plugins.Stonks do
   def get_meta_data(symbol) do
     api_key = Ircois.Config.read_config().alphavantage
 
-    url =
-      "https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=#{symbol}&apikey=#{
-        api_key
-      }"
+    url = "https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=#{symbol}&apikey=#{api_key}"
 
     with {:ok, r} <- HTTPoison.get(url),
          {:ok, json} <- r.body |> Poison.decode(),

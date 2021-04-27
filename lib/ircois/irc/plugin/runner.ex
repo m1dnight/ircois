@@ -121,9 +121,7 @@ defmodule Ircois.Plugin.Runner do
           mod_state
 
         r ->
-          Logger.error(
-            "Response from reaction in #{inspect(state.module)} is invalid!: #{inspect(r)}"
-          )
+          Logger.error("Response from reaction in #{inspect(state.module)} is invalid!: #{inspect(r)}")
       end
     else
       state.module_state

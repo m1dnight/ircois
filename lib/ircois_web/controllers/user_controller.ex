@@ -28,6 +28,7 @@ defmodule IrcoisWeb.UserController do
 
     # Last seen
     last_seen = Ircois.Data.last_seen(default_channel, username)
+
     data =
       case last_seen do
         nil ->
@@ -39,6 +40,7 @@ defmodule IrcoisWeb.UserController do
 
     # First seen
     first_seen = Ircois.Data.first_seen(default_channel, username)
+
     data =
       case first_seen do
         nil ->

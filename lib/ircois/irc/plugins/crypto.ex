@@ -31,9 +31,7 @@ defmodule Ircois.Plugins.Crypto do
       eth_value = eth_data |> Map.get("quote") |> Map.get("USD") |> Map.get("price")
       ltc_value = ltc_data |> Map.get("quote") |> Map.get("USD") |> Map.get("price")
 
-      "Bitcoin: #{btc_value |> number_to_currency}, Litecoin: #{ltc_value |> number_to_currency}, Ethereum: #{
-        eth_value |> number_to_currency
-      }"
+      "Bitcoin: #{btc_value |> number_to_currency}, Litecoin: #{ltc_value |> number_to_currency}, Ethereum: #{eth_value |> number_to_currency}"
     end
   end
 end
