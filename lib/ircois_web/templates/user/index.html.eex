@@ -1,5 +1,4 @@
-<span id="activity_per_hour" data-values='<%= raw(@activity_buckets |> bucket_values()) %>' data-labels='<%=raw(@activity_buckets |> bucket_labels()) %>'></span>
-test
+<span id="activity_per_hour" data-values='<%= raw(@data.activity_buckets |> bucket_values()) %>' data-labels='<%=raw(@data.activity_buckets |> bucket_labels()) %>'></span>
 
 <div class="row widget">
   <!-- Avatar and bio -->
@@ -11,31 +10,30 @@ test
   <!-- Stats -->
   <div class="col-lg-4 align-items-center  p-3">
     <h1>
-      <%= "m1dnight_" %>
+      <%= @data.nickname %>
     </h1>
-    <p>Active since 12/04/2020</p>
-    <p>Last seen 12/04/2021 13:45</p>
-    <p>Also known as m1dnight, m1dnight__, and UwMoeder</p>
-    rou
+    <p>Active since <%= @data.first_seen |> format_datetime() %></p>
+    <p>Last seen <%= @data.last_seen |> format_datetime() %></p>
+    <!-- <p>Also known as m1dnight, m1dnight__, and UwMoeder</p> -->
   </div>
 
   <div class="col-lg-4 align-items-center text-center">
     <ul class="list-group list-group-flush">
       <li class="list-group-item d-flex justify-content-between align-items-center">
         Total Messages
-        <span class="badge bg-success rounded-pill">15020</span>
+        <span class="badge bg-success rounded-pill"><%= @data.total %></span>
       </li>
       <li class="list-group-item d-flex justify-content-between align-items-center">
         Average Messages / Day
-        <span class="badge bg-success rounded-pill">13.4</span>
+        <span class="badge bg-success rounded-pill"><%= @data.avg_per_day |> format_float() %></span>
       </li>
       <li class="list-group-item d-flex justify-content-between align-items-center">
         Most Active Hour
-        <span class="badge bg-success rounded-pill">12:00 - 13:00</span>
+        <span class="badge bg-success rounded-pill"><%= elem(@data.most_active, 0) |> format_time() %> - <%= elem(@data.most_active, 1) |> format_time() %></span>
       </li>
       <li class="list-group-item d-flex justify-content-between align-items-center">
         Karma
-        <span class="badge bg-success rounded-pill">-5</span>
+        <span class="badge bg-success rounded-pill"><%= @data.karma %></span>
       </li>
     </ul>
   </div>

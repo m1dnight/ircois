@@ -6,6 +6,33 @@ defmodule Ircois.Statistics do
   #############################################################################
   # Statistics per user
 
+  def avg_per_day(username, channel) do
+    subq =
+      from m in Message,
+        select: %{
+          daytotal: count()
+        },
+        group_by: fragment("date_trunc('hour', (? AT TIME ZONE 'UTC'))", m.when),
+        where: m.channel == ^channel and m.from == ^username
+
+    average =
+      from(day in subquery(subq))
+      |> Repo.aggregate(:avg, :daytotal)
+
+    case average do
+      nil ->
+        0.0
+
+      _ ->
+        Decimal.to_float(average)
+    end
+  end
+
+  def total_messages(username, channel) do
+    query = from m in Message, where: m.channel == ^channel and m.from == ^username
+    Repo.aggregate(query, :count)
+  end
+
   def active_hours(username, channel) do
     # Timestamps in the database are all UTC.
     # Truncating them requires them being transformed into the local TZ: (? AT TIME ZONE 'UTC')

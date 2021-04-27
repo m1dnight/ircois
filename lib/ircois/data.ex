@@ -18,6 +18,23 @@ defmodule Ircois.Data do
     store_message(attrs)
   end
 
+  def first_seen(channel, nickname) do
+    query =
+      from m in Message,
+        order_by: [asc: m.when],
+        where: m.channel == ^channel and m.from == ^nickname,
+        limit: 1
+
+    case Repo.one(query) do
+      nil ->
+        nil
+
+      m ->
+        tz = Application.get_env(:ircois, :timezone)
+        %{m | when: DateTime.shift_zone!(m.when, tz)}
+    end
+  end
+
   def last_seen(channel, nickname) do
     query =
       from m in Message,

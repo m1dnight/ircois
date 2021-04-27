@@ -24,4 +24,19 @@ defmodule IrcoisWeb.UserView do
 
     "[#{vals}]"
   end
+
+  def format_datetime(nil), do: ""
+  def format_datetime(dt) do
+    Timex.format!(dt, "%d/%m/%Y %H:%M", :strftime)
+  end
+
+  def format_time(t) do
+    hour = "#{t.hour}" |> String.pad_leading(2, "0")
+    mins = "#{t.minute}" |> String.pad_leading(2, "0")
+    hour <> ":" <> mins
+  end
+
+  def format_float(f, decimals \\ 2) do
+    trunc(f * :math.pow(10, decimals)) / :math.pow(10, decimals)
+  end
 end
