@@ -48,10 +48,8 @@ defmodule IrcoisWeb.SearchLive do
     {:noreply, socket}
   end
 
-  defp show_time(datetime) do
-    datetime
-    |> DateTime.to_time()
-    |> Time.to_string()
+  defp show_time(dt) do
+    Timex.format!(dt, "%d/%m/%Y %H:%M", :strftime)
   end
 
   def labels_day(dt) do
