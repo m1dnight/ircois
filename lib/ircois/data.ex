@@ -24,7 +24,7 @@ defmodule Ircois.Data do
     query =
       from m in Message,
         where: m.channel == ^channel and like(m.content, ^"%#{pattern}%"),
-        order_by: [asc: m.when],
+        order_by: [desc: m.when],
         limit: 1000
 
     Repo.all(query)
@@ -37,7 +37,7 @@ defmodule Ircois.Data do
     query =
       from m in Message,
         where: m.channel == ^channel and like(m.content, ^"%#{pattern}%") and fragment("lower(?)", m.from) == ^from,
-        order_by: [asc: m.when],
+        order_by: [desc: m.when],
         limit: 1000
 
     Repo.all(query)
