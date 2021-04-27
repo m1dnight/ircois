@@ -10,6 +10,11 @@ $light: rgb(223, 223, 223);
 
 /* General */
 
+a {
+	color: inherit;
+	text-decoration: inherit;
+}
+
 // Reset margin by bootstrap.
 .table {
 	margin: 0rem !important;
@@ -21,7 +26,10 @@ body {
 	margin-bottom: 0;
 }
 
-.col-lg-12, .col-lg-4, .col-lg-3, .col-lg-6 {
+.col-lg-12,
+.col-lg-4,
+.col-lg-3,
+.col-lg-6 {
 	padding: 0.2rem;
 }
 
@@ -103,8 +111,7 @@ table.chatbox.chatbox tr td {
 	margin: -1rem 0 2rem;
 }
 
-
-// Listgroups 
+// Listgroups
 
 ul {
 }
@@ -113,4 +120,3 @@ ul {
 	background-color: $lightdark !important;
 	color: $light !important;
 }
-
