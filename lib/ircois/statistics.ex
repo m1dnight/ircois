@@ -12,7 +12,7 @@ defmodule Ircois.Statistics do
         select: %{
           daytotal: count()
         },
-        group_by: fragment("date_trunc('hour', (? AT TIME ZONE 'UTC'))", m.when),
+        group_by: fragment("date_trunc('day', (? AT TIME ZONE 'UTC'))", m.when),
         where: m.channel == ^channel and m.from == ^username
 
     average =
