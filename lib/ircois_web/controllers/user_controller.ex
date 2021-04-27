@@ -2,6 +2,7 @@ defmodule IrcoisWeb.UserController do
   use IrcoisWeb, :controller
 
   def user(conn, %{"user" => username}) do
+    username = String.downcase(username) |> String.trim()
     cfg = Ircois.Config.read_config()
     default_channel = hd(cfg.channels)
 
