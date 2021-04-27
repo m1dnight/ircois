@@ -18,6 +18,31 @@ defmodule Ircois.Data do
     store_message(attrs)
   end
 
+  def grep(pattern, channel) do
+    pattern = Regex.replace(~r/([\%_])/, pattern, "\\\\\\g{0}")
+
+    query =
+      from m in Message,
+        where: m.channel == ^channel and like(m.content, ^"%#{pattern}%"),
+        order_by: [asc: m.when],
+        limit: 1000
+
+    Repo.all(query)
+  end
+
+  def grep(pattern, channel, from) do
+    pattern = Regex.replace(~r/([\%_])/, pattern, "\\\\\\g{0}")
+    from = String.downcase(from)
+
+    query =
+      from m in Message,
+        where: m.channel == ^channel and like(m.content, ^"%#{pattern}%") and fragment("lower(?)", m.from) == ^from,
+        order_by: [asc: m.when],
+        limit: 1000
+
+    Repo.all(query)
+  end
+
   def first_seen(channel, nickname) do
     query =
       from m in Message,

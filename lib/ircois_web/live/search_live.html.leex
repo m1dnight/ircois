@@ -1,0 +1,27 @@
+
+<div class="row">
+	<div class="col-lg-12">
+		<form phx-change="search" class="search-form">
+			<%= text_input :grep_field, :query, placeholder: "Pattern to search for", autofocus: true, "phx-debounce": "300", class: "form-control", autocomplete: "off" %>
+		</form>
+	</div>
+</div>
+
+<!-- chatbox -->
+<div class="row">
+	<div class="col-lg-12 mt-4">
+		<div class="widget">
+			<table class="table chatbox">
+				<tbody>
+					<%= for m <- @messages do %>
+					<tr class="timestamp">
+						<td class=""><%= show_time(m.when) %></td>
+						<td class="nickname" style="color: #<%= @color_map[m.from] %>;"><a href="<%= Routes.user_path(@socket, :user, m.from) %>"><%= m.from %></a></td>
+						<td class="message"><%= m.content %></td>
+					</tr>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
