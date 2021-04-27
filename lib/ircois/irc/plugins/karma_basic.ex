@@ -17,12 +17,12 @@ defmodule Ircois.Plugins.KarmaBasic do
   react ~r/(?<sub>[^\s^\t]+)(\+\+|--)/, e do
     delta = if e.captures["op"] == "--", do: -1, else: 1
     Logger.debug("Increasing karma for #{e.captures["sub"]} with #{delta}")
-    Ircois.Data.add_karma(e.captures["sub"], delta)
+    Ircois.Data.add_karma(e.captures["sub"] |> String.downcase(), delta)
     {:noreply, e.state}
   end
 
   react ~r/^[ \t]*karma[ \t]+(?<sub>[^\s^\t]+)[ \t]*/i, e do
-    karma = Ircois.Data.get_karma(e.captures["sub"])
+    karma = Ircois.Data.get_karma(e.captures["sub"] |> String.downcase())
     {:reply, "'#{e.captures["sub"]}' has #{karma} karma points.", e.state}
   end
 
