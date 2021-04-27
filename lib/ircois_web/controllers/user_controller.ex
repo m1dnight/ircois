@@ -8,6 +8,7 @@ defmodule IrcoisWeb.UserController do
     data = %{nickname: username}
     # Activity per hour.
     buckets = Ircois.Statistics.active_hours(username, default_channel)
+    IO.inspect buckets
     most_active_start = buckets |> Map.to_list() |> Enum.sort_by(&elem(&1, 1), :desc) |> hd |> elem(0)
     most_active = {most_active_start, Time.add(most_active_start, 3600)}
     data = Map.put(data, :activity_buckets, buckets)

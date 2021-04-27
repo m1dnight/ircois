@@ -5,7 +5,7 @@ defmodule IrcoisWeb.UserView do
     vals =
       buckets
       |> Enum.map(fn {_t, p} ->
-        "\"#{trunc(p * 10000) / 100}\""
+        "\"#{format_float(p * 100, 2)}\""
       end)
       |> Enum.join(", ")
 
