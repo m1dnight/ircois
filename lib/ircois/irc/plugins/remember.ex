@@ -23,7 +23,7 @@ defmodule Ircois.Plugins.Remember do
     {:reply, "I noted that '#{sub}' is '#{exp}'", e.state}
   end
 
-  react ~r/^[ \t]*what[ \t]*is[ \t]*(?<sub>.+?)[ \t]*\?[ \t]*/i, e do
+  react ~r/^[ \t]*(?<sub>.+?)[ \t]*\?[ \t]*/i, e do
     sub = e.captures["sub"]
 
     case Data.known?(sub) do

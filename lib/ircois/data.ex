@@ -31,6 +31,7 @@ defmodule Ircois.Data do
   end
 
   def grep(pattern, channel, from) do
+    from = String.downcase(from)
     pattern = Regex.replace(~r/([\%_])/, pattern, "\\\\\\g{0}")
     from = String.downcase(from)
 
@@ -44,10 +45,11 @@ defmodule Ircois.Data do
   end
 
   def first_seen(channel, nickname) do
+    nickname = String.downcase(nickname)
     query =
       from m in Message,
         order_by: [asc: m.when],
-        where: m.channel == ^channel and m.from == ^nickname,
+        where: m.channel == ^channel and fragment("lower(?)", m.from) == ^nickname,
         limit: 1
 
     case Repo.one(query) do
@@ -61,10 +63,11 @@ defmodule Ircois.Data do
   end
 
   def last_seen(channel, nickname) do
+    nickname = String.downcase(nickname)
     query =
       from m in Message,
         order_by: [desc: m.when],
-        where: m.channel == ^channel and m.from == ^nickname,
+        where: m.channel == ^channel and fragment("lower(?)", m.from) == ^nickname,
         limit: 1
 
     case Repo.one(query) do
@@ -154,9 +157,9 @@ defmodule Ircois.Data do
   def most_active(channel) do
     q =
       from m in Message,
-        select: [m.from, count()],
+        select: [fragment("lower(?)", m.from), count()],
         where: m.channel == ^channel,
-        group_by: m.from,
+        group_by: fragment("lower(?)", m.from),
         order_by: [desc: count()],
         limit: 10
 
