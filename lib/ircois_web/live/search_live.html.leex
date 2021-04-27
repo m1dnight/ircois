@@ -14,10 +14,10 @@
 			<table class="table chatbox">
 				<tbody>
 					<%= for m <- @messages do %>
-					<tr class="timestamp">
-						<td class=""><%= show_time(m.when) %></td>
+					<tr >
+						<td class="timestamp"><%= show_time(m.when) %></td>
 						<td class="nickname" style="color: #<%= @color_map[m.from] %>;"><a href="<%= Routes.user_path(@socket, :user, m.from) %>"><%= m.from %></a></td>
-						<td class="message"><%= m.content %></td>
+						<td class="message" style="width: 78%;"><%= m.content %></td>
 					</tr>
 					<% end %>
 				</tbody>
