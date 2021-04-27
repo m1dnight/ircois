@@ -14,9 +14,8 @@ defmodule Ircois.Plugins.KarmaBasic do
     ]
   end
 
-  react ~r/(?<sub>[^\s^\t]+)(\+\+|--)/, e do
+  react ~r/(?<sub>[^\s^\t]+)(?<op>\+\+|--)/, e do
     delta = if e.captures["op"] == "--", do: -1, else: 1
-    Logger.debug("Increasing karma for #{e.captures["sub"]} with #{delta}")
     Ircois.Data.add_karma(e.captures["sub"] |> String.downcase(), delta)
     {:noreply, e.state}
   end
