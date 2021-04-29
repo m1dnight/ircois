@@ -6,6 +6,9 @@ defmodule Ircois.Statistics do
   #############################################################################
   # Statistics per user
 
+  @doc """
+  Returns the average messages per day for a given nickname.
+  """
   def avg_per_day(username, channel) do
     subq =
       from m in Message,
@@ -28,11 +31,18 @@ defmodule Ircois.Statistics do
     end
   end
 
+  @doc """
+  Returns the total messages sent by a specific user.
+  """
   def total_messages(username, channel) do
     query = from m in Message, where: m.channel == ^channel and fragment("lower(?)", m.from) == fragment("lower(?)", ^username)
     Repo.aggregate(query, :count)
   end
 
+  @doc """
+  Calculates the activity hours for each user.
+  Returns the total % of messages sent in buckets of 1 hour.
+  """
   def active_hours(username, channel) do
     # Timestamps in the database are all UTC.
     # Truncating them requires them being transformed into the local TZ: (? AT TIME ZONE 'UTC')
@@ -70,7 +80,7 @@ defmodule Ircois.Statistics do
   end
 
   @doc """
-  Given the computed buckets above, fills in the ones that are missing.
+  Given the computed buckets from active_hours/2, fills in the ones that are missing.
   Makes it easier to pass the data to chart.js.
   """
   def pad_buckets(buckets, bucket_size_hours \\ 1) do
