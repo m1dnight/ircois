@@ -7,14 +7,13 @@ defmodule Ircois.Statistics do
   # Statistics per user
 
   def avg_per_day(username, channel) do
-    username = String.downcase(username)
     subq =
       from m in Message,
         select: %{
           daytotal: count()
         },
         group_by: fragment("date_trunc('day', (? AT TIME ZONE 'UTC'))", m.when),
-        where: m.channel == ^channel and fragment("lower(?)", m.from) == ^username
+        where: m.channel == ^channel and fragment("lower(?)", m.from) == fragment("lower(?)", ^username)
 
     average =
       from(day in subquery(subq))
@@ -30,13 +29,11 @@ defmodule Ircois.Statistics do
   end
 
   def total_messages(username, channel) do
-    username = String.downcase(username)
-    query = from m in Message, where: m.channel == ^channel and fragment("lower(?)", m.from) == ^username
+    query = from m in Message, where: m.channel == ^channel and fragment("lower(?)", m.from) == fragment("lower(?)", ^username)
     Repo.aggregate(query, :count)
   end
 
   def active_hours(username, channel) do
-    username = String.downcase(username)
     # Timestamps in the database are all UTC.
     # Truncating them requires them being transformed into the local TZ: (? AT TIME ZONE 'UTC')
     # When they are returned from Ecto, they are in UTC again.
@@ -49,7 +46,7 @@ defmodule Ircois.Statistics do
           start_hour: fragment("date_part('hour', (? AT TIME ZONE 'UTC'))", m.when)
         },
         group_by: fragment("date_part('hour', (? AT TIME ZONE 'UTC'))", m.when),
-        where: m.channel == ^channel and fragment("lower(?)", m.from) == ^username
+        where: m.channel == ^channel and fragment("lower(?)", m.from) == fragment("lower(?)", ^username)
 
     # The hour is returned based on the timezone from the database, so the right timezone.
     buckets =

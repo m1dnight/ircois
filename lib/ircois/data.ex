@@ -30,14 +30,12 @@ defmodule Ircois.Data do
     Repo.all(query)
   end
 
-  def grep(pattern, channel, from) do
-    from = String.downcase(from)
+  def grep(pattern, channel, nickname) do
     pattern = Regex.replace(~r/([\%_])/, pattern, "\\\\\\g{0}")
-    from = String.downcase(from)
 
     query =
       from m in Message,
-        where: m.channel == ^channel and like(m.content, ^"%#{pattern}%") and fragment("lower(?)", m.from) == ^from,
+        where: m.channel == ^channel and like(m.content, ^"%#{pattern}%") and fragment("lower(?)", m.from) == fragment("lower(?)", ^nickname),
         order_by: [desc: m.when],
         limit: 1000
 
@@ -45,11 +43,10 @@ defmodule Ircois.Data do
   end
 
   def first_seen(channel, nickname) do
-    nickname = String.downcase(nickname)
     query =
       from m in Message,
         order_by: [asc: m.when],
-        where: m.channel == ^channel and fragment("lower(?)", m.from) == ^nickname,
+        where: m.channel == ^channel and fragment("lower(?)", m.from) == fragment("lower(?)", ^nickname),
         limit: 1
 
     case Repo.one(query) do
@@ -63,11 +60,10 @@ defmodule Ircois.Data do
   end
 
   def last_seen(channel, nickname) do
-    nickname = String.downcase(nickname)
     query =
       from m in Message,
         order_by: [desc: m.when],
-        where: m.channel == ^channel and fragment("lower(?)", m.from) == ^nickname,
+        where: m.channel == ^channel and fragment("lower(?)", m.from) == fragment("lower(?)", ^nickname),
         limit: 1
 
     case Repo.one(query) do
@@ -191,7 +187,7 @@ defmodule Ircois.Data do
   # Remembers
 
   def remember(name, description) do
-    f = Repo.one(from f in Fact, where: f.name == ^name)
+    f = Repo.one(from f in Fact, where: fragment("lower(?)", f.name) == fragment("lower(?)", ^name))
 
     if f != nil do
       Ecto.Changeset.change(f, description: description)
@@ -208,7 +204,7 @@ defmodule Ircois.Data do
   def known?(name) do
     query =
       from f in Fact,
-        where: f.name == ^name
+        where: fragment("lower(?)", f.name) == fragment("lower(?)", ^name)
 
     case Repo.one(query) do
       nil ->
@@ -225,8 +221,7 @@ defmodule Ircois.Data do
   def get_karma(subject) do
     query =
       from m in Karma,
-        where: m.subject == ^subject
-
+        where: fragment("lower(?)", m.subject) == fragment("lower(?)", ^subject)
     case Repo.one(query) do
       nil ->
         0
@@ -237,7 +232,7 @@ defmodule Ircois.Data do
   end
 
   def add_karma(subject, delta \\ 1) do
-    s = Repo.one(from m in Karma, where: m.subject == ^subject)
+    s = Repo.one(from m in Karma, where: fragment("lower(?)", m.subject) == fragment("lower(?)", ^subject))
 
     if s != nil do
       Ecto.Changeset.change(s, karma: s.karma + delta)
