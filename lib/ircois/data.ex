@@ -11,7 +11,6 @@ defmodule Ircois.Data do
   Stores a message in the backend.
   """
   def store_message(attrs = %{:from => _, :content => _, :channel => _, :when => _}) do
-    attrs = Map.update!(attrs, :from, &String.downcase/1)
 
     struct(Message)
     |> Message.changeset(attrs)
@@ -20,7 +19,7 @@ defmodule Ircois.Data do
   end
 
   def store_message(%{:from => random_nick, :content => message, :channel => channel}) do
-    attrs = %{:from => String.downcase(random_nick), :content => message, :channel => channel, :when => now_tz()}
+    attrs = %{:from => random_nick, :content => message, :channel => channel, :when => now_tz()}
     store_message(attrs)
   end
 
