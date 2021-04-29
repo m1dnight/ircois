@@ -42,6 +42,19 @@ defmodule Ircois.Plugin.Runner do
     {:ok, state}
   end
 
+  #############################################################################
+  # Nickchange
+
+  def handle_info({:nick_changed, old, new}, state) do
+    if Kernel.function_exported?(state.module, :rename, 1) do
+      mod_state = execute_rename(state.module.rename, old, new, state)
+      state = %{state | module_state: mod_state}
+      {:noreply, state}
+    else
+      {:noreply, state}
+    end
+  end
+
   ##############################################################################
   # Direct message.
 
@@ -80,6 +93,36 @@ defmodule Ircois.Plugin.Runner do
 
   ##############################################################################
   # Helpers
+
+  # ----------------------------------------------------------------------------
+  # Handler for nick changes.
+
+  def execute_rename(rename, old_nick, new_nick, state) do
+    m = rename.module
+    f = rename.func
+    o = rename.opts
+
+    p = 1.0 - Keyword.get(o, :probability, 1.0)
+
+    if :rand.uniform() >= p do
+      event = %{
+        old: old_nick,
+        new: new_nick,
+        state: state.module_state,
+        config: state.config
+      }
+
+      case apply(m, f, [event]) do
+        {:noreply, mod_state} ->
+          mod_state
+
+        r ->
+          Logger.error("Response from nick change in #{inspect(state.module)} is invalid!: #{inspect(r)}")
+      end
+    else
+      state.module_state
+    end
+  end
 
   # ----------------------------------------------------------------------------
   # Handler for channel messages.

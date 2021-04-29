@@ -35,6 +35,12 @@ defmodule Ircois.Connection.MessageHandler do
     {:noreply, state}
   end
 
+  # Somebody else changed their nick.
+  def handle_info({:nick_changed, old, new}, state) do
+    Logger.debug("#{old} is now known as #{new}")
+    {:noreply, state}
+  end
+
   # Direct message.
   def handle_info({:received, message, sender}, state) do
     from = sender.nick
@@ -64,7 +70,8 @@ defmodule Ircois.Connection.MessageHandler do
   end
 
   # Catch-all for messages you don't care about
-  def handle_info(_msg, state) do
+  def handle_info(msg, state) do
+    Logger.debug("Unhandled message: #{inspect(msg)}")
     {:noreply, state}
   end
 end

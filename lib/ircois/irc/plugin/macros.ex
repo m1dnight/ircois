@@ -5,6 +5,7 @@ defmodule Ircois.Plugin.Macros do
       import unquote(__MODULE__)
       Module.register_attribute(__MODULE__, :reactions, accumulate: true)
       Module.register_attribute(__MODULE__, :dms, accumulate: true)
+      Module.register_attribute(__MODULE__, :rename, accumulate: false)
       @before_compile unquote(__MODULE__)
     end
   end
@@ -14,6 +15,8 @@ defmodule Ircois.Plugin.Macros do
       def reactions(), do: @reactions
 
       def dms(), do: @dms
+
+      def rename(), do: @rename
     end
   end
 
@@ -33,6 +36,30 @@ defmodule Ircois.Plugin.Macros do
     quote do
       def initial_state() do
         unquote(body)
+      end
+    end
+  end
+
+  #############################################################################
+  # React to nickname changes.
+  defmacro rename(event_var, do: action_block) do
+    quote do
+      rename(unquote(event_var), [], do: unquote(action_block))
+    end
+  end
+
+  defmacro rename(event_var, options, do: action_block) do
+    func_name = "rename" |> String.to_atom()
+
+    quote do
+      @rename %{
+        func: unquote(func_name),
+        opts: unquote(options),
+        module: __MODULE__
+      }
+
+      def unquote(func_name)(unquote(event_var)) do
+        unquote(action_block)
       end
     end
   end

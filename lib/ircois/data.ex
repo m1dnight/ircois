@@ -1,8 +1,31 @@
 defmodule Ircois.Data do
-  alias Ircois.{Message, Karma, URL, Balance, Fact}
+  alias Ircois.{Message, Karma, URL, Balance, Fact, Alias}
   alias Ircois.Repo
   import Ecto.Query
   alias Ircois.PubSub
+
+  #############################################################################
+  # Aliases
+
+    def add_alias(attrs = %{:name => _, :alias => _, :when => _}) do
+      struct(Alias)
+      |> Alias.changeset(attrs)
+      |> Repo.insert()
+    end
+
+  def add_alias(%{:name => n, :alias => a}) do
+    attrs = %{:name => n, :alias => a, :when => now_tz()}
+
+    struct(Alias)
+    |> Alias.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  def known_aliases(_nickname) do
+    # Get them all out, and figure out a fast query later.
+    query = from a in Alias, order_by: [desc: a.when]
+    Repo.all(query)
+  end
 
   ##############################################################################
   # Messages
@@ -11,7 +34,6 @@ defmodule Ircois.Data do
   Stores a message in the backend.
   """
   def store_message(attrs = %{:from => _, :content => _, :channel => _, :when => _}) do
-
     struct(Message)
     |> Message.changeset(attrs)
     |> Repo.insert()
