@@ -6,7 +6,13 @@ defmodule Ircois.Data do
 
   ##############################################################################
   # Messages
+
+  @doc """
+  Stores a message in the backend.
+  """
   def store_message(attrs = %{:from => _, :content => _, :channel => _, :when => _}) do
+    attrs = Map.update!(attrs, :from, &String.downcase/1)
+
     struct(Message)
     |> Message.changeset(attrs)
     |> Repo.insert()
@@ -14,10 +20,14 @@ defmodule Ircois.Data do
   end
 
   def store_message(%{:from => random_nick, :content => message, :channel => channel}) do
-    attrs = %{:from => random_nick, :content => message, :channel => channel, :when => now_tz()}
+    attrs = %{:from => String.downcase(random_nick), :content => message, :channel => channel, :when => now_tz()}
     store_message(attrs)
   end
 
+  @doc """
+  Finds all messages that match a particular pattern.
+  A pattern can be any type of text, with `from:username` as an extra clause.
+  """
   def grep(pattern, channel) do
     pattern = Regex.replace(~r/([\%_])/, pattern, "\\\\\\g{0}")
 
@@ -42,6 +52,9 @@ defmodule Ircois.Data do
     Repo.all(query)
   end
 
+  @doc """
+  Returns the first message sent by a specific username.
+  """
   def first_seen(channel, nickname) do
     query =
       from m in Message,
@@ -59,6 +72,9 @@ defmodule Ircois.Data do
     end
   end
 
+  @doc """
+  Returns the last message sent by a user.
+  """
   def last_seen(channel, nickname) do
     query =
       from m in Message,
@@ -76,6 +92,9 @@ defmodule Ircois.Data do
     end
   end
 
+  @doc """
+  Gets the last n messages for a given channel.
+  """
   def get_last_n(channel, n \\ 10) do
     query =
       from m in Message,
@@ -91,6 +110,9 @@ defmodule Ircois.Data do
     end)
   end
 
+  @doc """
+  Counts the average total of messages per day.
+  """
   def message_count_per_day(channel) do
     subquery =
       from m in Message,
@@ -121,6 +143,9 @@ defmodule Ircois.Data do
     |> Enum.sort_by(fn d -> d.day end)
   end
 
+  @doc """
+  Counts the average messages per hour for a channel.
+  """
   def message_count_per_hour(channel) do
     subquery =
       from m in Message,
@@ -150,6 +175,9 @@ defmodule Ircois.Data do
     |> Enum.sort_by(fn d -> d.hour end)
   end
 
+  @doc """
+  Finds out who types the most in the channel, returns top 10.
+  """
   def most_active(channel) do
     q =
       from m in Message,
@@ -164,6 +192,10 @@ defmodule Ircois.Data do
 
   ##############################################################################
   # URLs
+
+  @doc """
+  Store an url in the db.
+  """
   def store_url(attrs) do
     attrs = Map.put(attrs, :when, now_tz())
 
@@ -173,6 +205,9 @@ defmodule Ircois.Data do
     |> PubSub.notify_new_url()
   end
 
+  @doc """
+  Returns the last n urls sent in a channel.
+  """
   def last_n_urls(n \\ 10) do
     query =
       from m in URL,
@@ -186,6 +221,9 @@ defmodule Ircois.Data do
   #############################################################################
   # Remembers
 
+  @doc """
+  Adds a fact to the database.
+  """
   def remember(name, description) do
     f = Repo.one(from f in Fact, where: fragment("lower(?)", f.name) == fragment("lower(?)", ^name))
 
@@ -194,6 +232,8 @@ defmodule Ircois.Data do
       |> Repo.update()
       |> PubSub.notify_fact_update()
     else
+      name = String.downcase(name)
+
       struct(Fact)
       |> Fact.changeset(%{:name => name, :description => description})
       |> Repo.insert()
@@ -201,6 +241,9 @@ defmodule Ircois.Data do
     end
   end
 
+  @doc """
+  Checks if a fact is known.
+  """
   def known?(name) do
     query =
       from f in Fact,
@@ -218,6 +261,10 @@ defmodule Ircois.Data do
   ##############################################################################
   # Karma
 
+  @doc """
+  Gets the karma for a given subject.
+  Subject names are case insensitive.
+  """
   def get_karma(subject) do
     query =
       from m in Karma,
@@ -232,6 +279,9 @@ defmodule Ircois.Data do
     end
   end
 
+  @doc """
+  Adds karma to a subject. A subject is case insensitive.
+  """
   def add_karma(subject, delta \\ 1) do
     s = Repo.one(from m in Karma, where: fragment("lower(?)", m.subject) == fragment("lower(?)", ^subject))
 
@@ -240,6 +290,8 @@ defmodule Ircois.Data do
       |> Repo.update()
       |> PubSub.notify_karma_update()
     else
+      subject = String.downcase(subject)
+
       struct(Karma)
       |> Karma.changeset(%{:karma => delta, :subject => subject})
       |> Repo.insert()
@@ -247,6 +299,9 @@ defmodule Ircois.Data do
     end
   end
 
+  @doc """
+  Returns the top n karma results.
+  """
   def karma_top(n \\ nil) do
     query =
       if n do
@@ -261,6 +316,9 @@ defmodule Ircois.Data do
     Repo.all(query)
   end
 
+  @doc """
+  Returns the bottom n karma entries.
+  """
   def karma_bottom(n \\ 10) do
     query =
       from m in Karma,
@@ -272,6 +330,7 @@ defmodule Ircois.Data do
 
   ##############################################################################
   # Helpers
+
   defp now_tz() do
     tz = Application.get_env(:ircois, :timezone)
     DateTime.now!(tz)
