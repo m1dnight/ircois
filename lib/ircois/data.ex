@@ -222,6 +222,7 @@ defmodule Ircois.Data do
     query =
       from m in Karma,
         where: fragment("lower(?)", m.subject) == fragment("lower(?)", ^subject)
+
     case Repo.one(query) do
       nil ->
         0

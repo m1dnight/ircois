@@ -17,7 +17,6 @@ defmodule IrcoisWeb.SearchLive do
     channel = hd(cfg.channels)
     # Sanitize input.
 
-
     # Ignore empty queries.
     case String.trim(query) do
       "" ->
@@ -28,10 +27,10 @@ defmodule IrcoisWeb.SearchLive do
 
         matches =
           if from == nil or from["from"] == "" do
-             Ircois.Data.grep(query, channel)
-            else
-              query = Regex.replace(~r/from:(?<from>(\w+))?/i, query, "") |> String.trim()
-              Ircois.Data.grep(query, channel, from["from"])
+            Ircois.Data.grep(query, channel)
+          else
+            query = Regex.replace(~r/from:(?<from>(\w+))?/i, query, "") |> String.trim()
+            Ircois.Data.grep(query, channel, from["from"])
           end
 
         color_map = nick_color_map(matches)
