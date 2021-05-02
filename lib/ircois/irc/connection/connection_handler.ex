@@ -18,6 +18,18 @@ defmodule Ircois.Connection.ConnectionHandler do
     {:noreply, {client, config}}
   end
 
+  def handle_info(:disconnected, {client, config}) do
+    Logger.error("Server disconnected!")
+    # Only crash after 10 seconds to give the remote server to restart.
+    Process.send_after(self(), :restart_connection, 10_000)
+
+    {:noreply, {client, config}}
+  end
+
+  def handle_info(:restart_connection, state) do
+    {:stop, :normal, state}
+  end
+
   # Catch-all for messages you don't care about
   def handle_info(_msg, state) do
     {:noreply, state}
