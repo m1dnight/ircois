@@ -28,11 +28,11 @@ config :logger,
     metadata: [:request_id]
 
 config :logger, :debug,
-  path: "debug.log",
+  path: "logs/debug.log",
   level: :debug
 
 config :logger, :error,
-  path: "error.log",
+  path: "logs/error.log",
   level: :error
 
 
