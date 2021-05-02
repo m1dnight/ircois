@@ -19,9 +19,23 @@ config :ircois, IrcoisWeb.Endpoint,
   live_view: [signing_salt: "1ifhtLMl"]
 
 # Configures Elixir's Logger
-config :logger, :console,
-  format: "$time $metadata[$level] $message\n",
-  metadata: [:request_id]
+config :logger,
+  backends: [:console, {LoggerFileBackend, :debug}, {LoggerFileBackend, :error}]
+
+
+  config :logger, :console,
+    format: "$time $metadata[$level] $message\n",
+    metadata: [:request_id]
+
+config :logger, :debug,
+  path: "debug.log",
+  level: :debug
+
+config :logger, :error,
+  path: "error.log",
+  level: :error
+
+
 
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason

@@ -21,7 +21,7 @@ defmodule Ircois.MixProject do
   def application do
     [
       mod: {Ircois.Application, []},
-      extra_applications: [:logger, :runtime_tools, :exirc]
+      extra_applications: [:logger, :runtime_tools, :exirc, :logger_file_backend]
     ]
   end
 
@@ -56,7 +56,8 @@ defmodule Ircois.MixProject do
       {:elixilorem, "~> 0.0.1", only: :dev},
       {:oauther, "~> 1.1"},
       {:extwitter, "~> 0.12"},
-      {:timex, "~> 3.6"}
+      {:timex, "~> 3.6"},
+      {:logger_file_backend, "~> 0.0.10"}
     ]
   end
 
