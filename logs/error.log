@@ -94,3 +94,4 @@ Function: &Phoenix.Endpoint.Watcher.watch/2
     (stdlib 3.12.1.2) proc_lib.erl:249: :proc_lib.init_p_do_apply/3
 Function: &Phoenix.Endpoint.Watcher.watch/2
     Args: ["node", ["node_modules/webpack/bin/webpack.js", "--mode", "development", "--watch-stdin", {:cd, "/Users/christophe/Documents/Code/ircois/assets"}]]
+10:58:54.635 [error] Can't find executable `mac_listener`
