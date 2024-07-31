@@ -1,0 +1,126 @@
+/* @import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities"; */
+
+/* This file is for your main application css. */
+/* @import "../node_modules/nprogress/nprogress.css"; */
+/* @import "../node_modules/bootstrap/dist/css/bootstrap.min.css"; */
+
+/* General */
+
+section {
+  --main-bg-color: brown;
+  --dark: rgb(43, 44, 44);
+  --lightdark: rgb(33, 37, 41);
+  --light: rgb(223, 223, 223);
+}
+/* General */
+
+a {
+	color: inherit;
+	text-decoration: inherit;
+}
+
+.table {
+	margin: 0rem !important;
+}
+
+body {
+	margin-top: 5rem;
+	color: var(--light);
+	margin-bottom: 0;
+}
+
+.col-lg-12,
+.col-lg-4,
+.col-lg-3,
+.col-lg-6 {
+	padding: 0.2rem;
+}
+
+/* Widgets */
+.widget {
+	background-color: var(--lightdark);
+	border-radius: 5px;
+	border: 1px solid;
+	height: 100%;
+	padding: 1rem;
+}
+
+/* Linkbox */
+.url {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	font-family: monospace;
+}
+
+/* Chatbox */
+table.chatbox {
+	font-family: monospace;
+	font-size: 0.8rem;
+	border: none !important;
+	color: var(--light);
+	overflow: scroll;
+}
+
+table.chatbox tr td {
+	vertical-align: middle;
+	border: none !important;
+}
+
+table.chatbox tr td.nickname {
+	text-align: right;
+}
+
+table.chatbox tr td.message {
+	width: 99%;
+}
+
+table.chatbox.chatbox tr td {
+	padding-top: 0rem;
+	padding-bottom: 0rem;
+}
+
+/* Alerts and form errors */
+.alert {
+	padding: 15px;
+	margin-bottom: 20px;
+	border: 1px solid transparent;
+	border-radius: 4px;
+}
+.alert-info {
+	color: #31708f;
+	background-color: #d9edf7;
+	border-color: #bce8f1;
+}
+.alert-warning {
+	color: #8a6d3b;
+	background-color: #fcf8e3;
+	border-color: #faebcc;
+}
+.alert-danger {
+	color: #a94442;
+	background-color: #f2dede;
+	border-color: #ebccd1;
+}
+.alert p {
+	margin-bottom: 0;
+}
+.alert:empty {
+	display: none;
+}
+.invalid-feedback {
+	color: #a94442;
+	display: block;
+	margin: -1rem 0 2rem;
+}
+
+
+ul {
+}
+
+.list-group-item {
+	background-color: var(--lightdark) !important;
+	color: var(--light) !important;
+}
