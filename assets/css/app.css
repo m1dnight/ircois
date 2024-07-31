@@ -1,0 +1,21 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+svg > text {
+  font-size: 0.5rem;
+  font-family: "Courier New", Courier, monospace;
+  font-style: bold;
+}
+
+@media (prefers-color-scheme: dark) {
+  svg > text {
+    fill: white;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  svg > text {
+    fill: black;
+  }
+}
