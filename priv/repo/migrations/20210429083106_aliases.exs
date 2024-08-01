@@ -9,6 +9,5 @@ defmodule Ircois.Repo.Migrations.Aliases do
 
       timestamps()
     end
-
   end
 end

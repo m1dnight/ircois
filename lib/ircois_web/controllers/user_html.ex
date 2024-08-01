@@ -1,5 +1,12 @@
-defmodule IrcoisWeb.UserView do
-  use IrcoisWeb, :view
+defmodule IrcoisWeb.UserHTML do
+  @moduledoc """
+  This module contains pages rendered by PageController.
+
+  See the `page_html` directory for all templates available.
+  """
+  use IrcoisWeb, :html
+
+  embed_templates "user_html/*"
 
   def bucket_values(buckets) do
     vals =
@@ -40,4 +47,5 @@ defmodule IrcoisWeb.UserView do
   def format_float(f, decimals \\ 2) do
     trunc(f * :math.pow(10, decimals)) / :math.pow(10, decimals)
   end
+
 end

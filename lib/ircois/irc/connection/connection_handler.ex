@@ -8,7 +8,7 @@ defmodule Ircois.Connection.ConnectionHandler do
 
   def init([client, config]) do
     ExIRC.Client.add_handler(client, self())
-    ExIRC.Client.connect!(client, config.server, config.port)
+    # ExIRC.Client.connect!(client, config.server, config.port)
     {:ok, {client, config}}
   end
 

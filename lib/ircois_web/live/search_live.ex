@@ -12,7 +12,7 @@ defmodule IrcoisWeb.SearchLive do
   end
 
   @impl
-  def handle_event("search", %{"grep_field" => %{"query" => query}}, socket) do
+  def handle_event("search", %{"query" => query}, socket) do
     cfg = Ircois.Config.read_config()
     channel = hd(cfg.channels)
     # Sanitize input.

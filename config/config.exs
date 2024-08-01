@@ -20,12 +20,11 @@ config :ircois, IrcoisWeb.Endpoint,
 
 # Configures Elixir's Logger
 config :logger,
-  backends: [:console, {LoggerFileBackend, :debug}, {LoggerFileBackend, :error}]
+  backends: [:console]
 
-
-  config :logger, :console,
-    format: "$time $metadata[$level] $message\n",
-    metadata: [:request_id]
+config :logger, :console,
+  format: "$time $metadata[$level] $message\n",
+  metadata: [:request_id]
 
 config :logger, :debug,
   path: "logs/debug.log",
@@ -34,8 +33,6 @@ config :logger, :debug,
 config :logger, :error,
   path: "logs/error.log",
   level: :error
-
-
 
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
@@ -57,8 +54,7 @@ config :tailwind,
 config :esbuild,
   version: "0.12.17",
   default: [
-    args:
-      ~w(js/app.js --bundle --target=es2017 --outdir=../priv/static/assets --external:/fonts/* --external:/images/*),
+    args: ~w(js/app.js --bundle --target=es2017 --outdir=../priv/static/assets --external:/fonts/* --external:/images/*),
     cd: Path.expand("../assets", __DIR__),
     env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
   ]

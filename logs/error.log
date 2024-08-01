@@ -1,0 +1,108 @@
+10:09:03.742 [error] Postgrex.Protocol (#PID<0.427.0>) failed to connect: ** (Postgrex.Error) FATAL 3D000 (invalid_catalog_name) database "ircois_dev" does not exist
+10:09:03.742 [error] Postgrex.Protocol (#PID<0.428.0>) failed to connect: ** (Postgrex.Error) FATAL 3D000 (invalid_catalog_name) database "ircois_dev" does not exist
+10:09:03.742 [error] Postgrex.Protocol (#PID<0.429.0>) failed to connect: ** (Postgrex.Error) FATAL 3D000 (invalid_catalog_name) database "ircois_dev" does not exist
+10:09:03.742 [error] Postgrex.Protocol (#PID<0.423.0>) failed to connect: ** (Postgrex.Error) FATAL 3D000 (invalid_catalog_name) database "ircois_dev" does not exist
+10:09:03.742 [error] Postgrex.Protocol (#PID<0.424.0>) failed to connect: ** (Postgrex.Error) FATAL 3D000 (invalid_catalog_name) database "ircois_dev" does not exist
+10:09:03.742 [error] Postgrex.Protocol (#PID<0.425.0>) failed to connect: ** (Postgrex.Error) FATAL 3D000 (invalid_catalog_name) database "ircois_dev" does not exist
+10:09:03.742 [error] Postgrex.Protocol (#PID<0.431.0>) failed to connect: ** (Postgrex.Error) FATAL 3D000 (invalid_catalog_name) database "ircois_dev" does not exist
+10:09:03.742 [error] Postgrex.Protocol (#PID<0.426.0>) failed to connect: ** (Postgrex.Error) FATAL 3D000 (invalid_catalog_name) database "ircois_dev" does not exist
+10:09:03.742 [error] Postgrex.Protocol (#PID<0.430.0>) failed to connect: ** (Postgrex.Error) FATAL 3D000 (invalid_catalog_name) database "ircois_dev" does not exist
+10:09:03.742 [error] Postgrex.Protocol (#PID<0.432.0>) failed to connect: ** (Postgrex.Error) FATAL 3D000 (invalid_catalog_name) database "ircois_dev" does not exist
+10:09:03.752 [error] Configuration file "/Users/christophe/Documents/Code/ircois/config.json" does not exist, creating default.
+10:09:04.811 [error] Postgrex.Protocol (#PID<0.432.0>) failed to connect: ** (Postgrex.Error) FATAL 3D000 (invalid_catalog_name) database "ircois_dev" does not exist
+10:09:04.812 [error] Postgrex.Protocol (#PID<0.427.0>) failed to connect: ** (Postgrex.Error) FATAL 3D000 (invalid_catalog_name) database "ircois_dev" does not exist
+10:09:05.040 [error] Postgrex.Protocol (#PID<0.426.0>) failed to connect: ** (Postgrex.Error) FATAL 3D000 (invalid_catalog_name) database "ircois_dev" does not exist
+10:09:05.098 [error] Postgrex.Protocol (#PID<0.431.0>) failed to connect: ** (Postgrex.Error) FATAL 3D000 (invalid_catalog_name) database "ircois_dev" does not exist
+10:09:05.237 [error] Postgrex.Protocol (#PID<0.429.0>) failed to connect: ** (Postgrex.Error) FATAL 3D000 (invalid_catalog_name) database "ircois_dev" does not exist
+10:09:05.437 [error] Postgrex.Protocol (#PID<0.423.0>) failed to connect: ** (Postgrex.Error) FATAL 3D000 (invalid_catalog_name) database "ircois_dev" does not exist
+10:09:05.480 [error] Postgrex.Protocol (#PID<0.428.0>) failed to connect: ** (Postgrex.Error) FATAL 3D000 (invalid_catalog_name) database "ircois_dev" does not exist
+10:09:05.497 [error] Postgrex.Protocol (#PID<0.430.0>) failed to connect: ** (Postgrex.Error) FATAL 3D000 (invalid_catalog_name) database "ircois_dev" does not exist
+10:09:28.335 [error] Task #PID<0.586.0> started from IrcoisWeb.Endpoint terminating
+** (stop) :watcher_command_error
+    (phoenix 1.6.16) lib/phoenix/endpoint/watcher.ex:55: Phoenix.Endpoint.Watcher.watch/2
+    (elixir 1.11.4) lib/task/supervised.ex:90: Task.Supervised.invoke_mfa/2
+    (stdlib 3.12.1.2) proc_lib.erl:249: :proc_lib.init_p_do_apply/3
+Function: &Phoenix.Endpoint.Watcher.watch/2
+    Args: ["node", ["node_modules/webpack/bin/webpack.js", "--mode", "development", "--watch-stdin", {:cd, "/Users/christophe/Documents/Code/ircois/assets"}]]
+10:09:30.518 [error] Task #PID<0.596.0> started from IrcoisWeb.Endpoint terminating
+** (stop) :watcher_command_error
+    (phoenix 1.6.16) lib/phoenix/endpoint/watcher.ex:55: Phoenix.Endpoint.Watcher.watch/2
+    (elixir 1.11.4) lib/task/supervised.ex:90: Task.Supervised.invoke_mfa/2
+    (stdlib 3.12.1.2) proc_lib.erl:249: :proc_lib.init_p_do_apply/3
+Function: &Phoenix.Endpoint.Watcher.watch/2
+    Args: ["node", ["node_modules/webpack/bin/webpack.js", "--mode", "development", "--watch-stdin", {:cd, "/Users/christophe/Documents/Code/ircois/assets"}]]
+10:09:32.670 [error] Task #PID<0.606.0> started from IrcoisWeb.Endpoint terminating
+** (stop) :watcher_command_error
+    (phoenix 1.6.16) lib/phoenix/endpoint/watcher.ex:55: Phoenix.Endpoint.Watcher.watch/2
+    (elixir 1.11.4) lib/task/supervised.ex:90: Task.Supervised.invoke_mfa/2
+    (stdlib 3.12.1.2) proc_lib.erl:249: :proc_lib.init_p_do_apply/3
+Function: &Phoenix.Endpoint.Watcher.watch/2
+    Args: ["node", ["node_modules/webpack/bin/webpack.js", "--mode", "development", "--watch-stdin", {:cd, "/Users/christophe/Documents/Code/ircois/assets"}]]
+10:09:34.853 [error] Task #PID<0.611.0> started from IrcoisWeb.Endpoint terminating
+** (stop) :watcher_command_error
+    (phoenix 1.6.16) lib/phoenix/endpoint/watcher.ex:55: Phoenix.Endpoint.Watcher.watch/2
+    (elixir 1.11.4) lib/task/supervised.ex:90: Task.Supervised.invoke_mfa/2
+    (stdlib 3.12.1.2) proc_lib.erl:249: :proc_lib.init_p_do_apply/3
+Function: &Phoenix.Endpoint.Watcher.watch/2
+    Args: ["node", ["node_modules/webpack/bin/webpack.js", "--mode", "development", "--watch-stdin", {:cd, "/Users/christophe/Documents/Code/ircois/assets"}]]
+10:09:37.024 [error] Task #PID<0.612.0> started from IrcoisWeb.Endpoint terminating
+** (stop) :watcher_command_error
+    (phoenix 1.6.16) lib/phoenix/endpoint/watcher.ex:55: Phoenix.Endpoint.Watcher.watch/2
+    (elixir 1.11.4) lib/task/supervised.ex:90: Task.Supervised.invoke_mfa/2
+    (stdlib 3.12.1.2) proc_lib.erl:249: :proc_lib.init_p_do_apply/3
+Function: &Phoenix.Endpoint.Watcher.watch/2
+    Args: ["node", ["node_modules/webpack/bin/webpack.js", "--mode", "development", "--watch-stdin", {:cd, "/Users/christophe/Documents/Code/ircois/assets"}]]
+10:09:39.192 [error] Task #PID<0.613.0> started from IrcoisWeb.Endpoint terminating
+** (stop) :watcher_command_error
+    (phoenix 1.6.16) lib/phoenix/endpoint/watcher.ex:55: Phoenix.Endpoint.Watcher.watch/2
+    (elixir 1.11.4) lib/task/supervised.ex:90: Task.Supervised.invoke_mfa/2
+    (stdlib 3.12.1.2) proc_lib.erl:249: :proc_lib.init_p_do_apply/3
+Function: &Phoenix.Endpoint.Watcher.watch/2
+    Args: ["node", ["node_modules/webpack/bin/webpack.js", "--mode", "development", "--watch-stdin", {:cd, "/Users/christophe/Documents/Code/ircois/assets"}]]
+10:09:41.382 [error] Task #PID<0.614.0> started from IrcoisWeb.Endpoint terminating
+** (stop) :watcher_command_error
+    (phoenix 1.6.16) lib/phoenix/endpoint/watcher.ex:55: Phoenix.Endpoint.Watcher.watch/2
+    (elixir 1.11.4) lib/task/supervised.ex:90: Task.Supervised.invoke_mfa/2
+    (stdlib 3.12.1.2) proc_lib.erl:249: :proc_lib.init_p_do_apply/3
+Function: &Phoenix.Endpoint.Watcher.watch/2
+    Args: ["node", ["node_modules/webpack/bin/webpack.js", "--mode", "development", "--watch-stdin", {:cd, "/Users/christophe/Documents/Code/ircois/assets"}]]
+10:09:43.560 [error] Task #PID<0.615.0> started from IrcoisWeb.Endpoint terminating
+** (stop) :watcher_command_error
+    (phoenix 1.6.16) lib/phoenix/endpoint/watcher.ex:55: Phoenix.Endpoint.Watcher.watch/2
+    (elixir 1.11.4) lib/task/supervised.ex:90: Task.Supervised.invoke_mfa/2
+    (stdlib 3.12.1.2) proc_lib.erl:249: :proc_lib.init_p_do_apply/3
+Function: &Phoenix.Endpoint.Watcher.watch/2
+    Args: ["node", ["node_modules/webpack/bin/webpack.js", "--mode", "development", "--watch-stdin", {:cd, "/Users/christophe/Documents/Code/ircois/assets"}]]
+10:09:45.734 [error] Task #PID<0.616.0> started from IrcoisWeb.Endpoint terminating
+** (stop) :watcher_command_error
+    (phoenix 1.6.16) lib/phoenix/endpoint/watcher.ex:55: Phoenix.Endpoint.Watcher.watch/2
+    (elixir 1.11.4) lib/task/supervised.ex:90: Task.Supervised.invoke_mfa/2
+    (stdlib 3.12.1.2) proc_lib.erl:249: :proc_lib.init_p_do_apply/3
+Function: &Phoenix.Endpoint.Watcher.watch/2
+    Args: ["node", ["node_modules/webpack/bin/webpack.js", "--mode", "development", "--watch-stdin", {:cd, "/Users/christophe/Documents/Code/ircois/assets"}]]
+10:09:47.927 [error] Task #PID<0.617.0> started from IrcoisWeb.Endpoint terminating
+** (stop) :watcher_command_error
+    (phoenix 1.6.16) lib/phoenix/endpoint/watcher.ex:55: Phoenix.Endpoint.Watcher.watch/2
+    (elixir 1.11.4) lib/task/supervised.ex:90: Task.Supervised.invoke_mfa/2
+    (stdlib 3.12.1.2) proc_lib.erl:249: :proc_lib.init_p_do_apply/3
+Function: &Phoenix.Endpoint.Watcher.watch/2
+    Args: ["node", ["node_modules/webpack/bin/webpack.js", "--mode", "development", "--watch-stdin", {:cd, "/Users/christophe/Documents/Code/ircois/assets"}]]
+10:09:54.644 [error] Task #PID<0.940.0> started from IrcoisWeb.Endpoint terminating
+** (stop) :watcher_command_error
+    (phoenix 1.6.16) lib/phoenix/endpoint/watcher.ex:55: Phoenix.Endpoint.Watcher.watch/2
+    (elixir 1.11.4) lib/task/supervised.ex:90: Task.Supervised.invoke_mfa/2
+    (stdlib 3.12.1.2) proc_lib.erl:249: :proc_lib.init_p_do_apply/3
+Function: &Phoenix.Endpoint.Watcher.watch/2
+    Args: ["node", ["node_modules/webpack/bin/webpack.js", "--mode", "development", "--watch-stdin", {:cd, "/Users/christophe/Documents/Code/ircois/assets"}]]
+10:58:54.635 [error] Can't find executable `mac_listener`
+11:27:35.942 [error] Can't find executable `mac_listener`
+13:29:07.607 [error] GenServer Ircois.Connection.MessageHandler terminating
+** (Protocol.UndefinedError) protocol String.Chars not implemented for %ExIRC.SenderInfo{host: "user/ad1m", nick: "ad1m", user: "~ad1m"} of type ExIRC.SenderInfo (a struct). This protocol is implemented for the following type(s): Phoenix.LiveComponent.CID, Postgrex.Copy, Postgrex.Query, Decimal, Float, DateTime, Time, List, Version.Requirement, Atom, Integer, Version, Date, BitString, NaiveDateTime, URI, Hex.Solver.Incompatibility, Hex.Solver.Constraints.Union, Hex.Solver.PackageRange, Hex.Solver.Assignment, Hex.Solver.Constraints.Empty, Hex.Solver.Term, Hex.Solver.Constraints.Range
+    (elixir 1.11.4) lib/string/chars.ex:3: String.Chars.impl_for!/1
+    (elixir 1.11.4) lib/string/chars.ex:22: String.Chars.to_string/1
+    (ircois 0.3.1415926535) lib/ircois/irc/connection/message_handler.ex:22: Ircois.Connection.MessageHandler.handle_info/2
+    (stdlib 3.12.1.2) gen_server.erl:637: :gen_server.try_dispatch/4
+    (stdlib 3.12.1.2) gen_server.erl:711: :gen_server.handle_msg/6
+    (stdlib 3.12.1.2) proc_lib.erl:249: :proc_lib.init_p_do_apply/3
+Last message: {:joined, "#ubuntu", %ExIRC.SenderInfo{host: "user/ad1m", nick: "ad1m", user: "~ad1m"}}
+State: {ExIRC.Client, %Ircois.Config{alphavantage: "apikeyhere", channels: ["#ircois", "#ubuntu"], client: nil, coinmarketcap: "putapikeyhere", modules: [Ircois.Plugins.KarmaBasic, Ircois.Plugins.Help, Ircois.Plugins.Logger, Ircois.Plugins.Version, Ircois.Plugins.Url, Ircois.Plugins.PageTitle], nickname: "ircois", password: "", port: 6667, server: "irc.eu.libera.chat", twitter: %{"access_token" => "api key", "access_token_secret" => "secret", "consumer_key" => "consumer key", "consumer_secret" => "consumer secret"}, user: "Cois"}}

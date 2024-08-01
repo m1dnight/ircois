@@ -6,7 +6,7 @@ defmodule Ircois.MixProject do
       app: :ircois,
       # pi:       3.141592653589793
       version: "0.3.1415926535",
-      elixir: "~> 1.11",
+      elixir: "~> 1.13",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
@@ -19,8 +19,7 @@ defmodule Ircois.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {Ircois.Application, []},
-      extra_applications: [:logger, :runtime_tools, :exirc, :logger_file_backend]
+      mod: {Ircois.Application, []}
     ]
   end
 
@@ -33,15 +32,15 @@ defmodule Ircois.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.6"},
+      {:phoenix, "~> 1.7"},
       {:phoenix_ecto, "~> 4.1"},
       {:ecto_sql, "~> 3.4"},
       {:postgrex, ">= 0.0.0"},
-      {:phoenix_live_view, "~> 0.16.4"},
+      {:phoenix_live_view, "~> 0.20.17"},
       {:floki, ">= 0.27.0", only: :test},
       {:phoenix_html, "~> 3.0"},
       {:phoenix_live_reload, "~> 1.5.3", only: :dev},
-      {:phoenix_live_dashboard, "~> 0.5"},
+      {:phoenix_live_dashboard, "~> 0.8"},
       {:telemetry_metrics, "~> 0.6"},
       {:telemetry_poller, "~> 0.5"},
       {:gettext, "~> 0.11"},
@@ -56,7 +55,6 @@ defmodule Ircois.MixProject do
       {:oauther, "~> 1.1"},
       {:extwitter, "~> 0.12"},
       {:timex, "~> 3.6"},
-      {:logger_file_backend, "~> 0.0.10"},
       {:esbuild, "~> 0.2", runtime: Mix.env() == :dev},
       {:tailwind, "~> 0.2.0", runtime: Mix.env() == :dev}
     ]

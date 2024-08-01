@@ -23,7 +23,7 @@
 					<%= for m <- @messages do %>
 					<tr class="timestamp">
 						<td class=""><%= show_time(m.when) %></td>
-						<td class="nickname" style="color: #<%= @color_map[m.from] %>;"><a href="<%= Routes.user_path(@socket, :user, m.from) %>"><%= m.from %></a></td>
+						<td class="nickname" style="color: #<%= @color_map[m.from] %>;"><a href="<%= ~p"/user/#{m.from}" %>"><%= m.from %></a></td>
 						<td class="message"><%= m.content %></td>
 					</tr>
 					<% end %>

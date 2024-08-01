@@ -7,11 +7,11 @@ defmodule Ircois.Data do
   #############################################################################
   # Aliases
 
-    def add_alias(attrs = %{:name => _, :alias => _, :when => _}) do
-      struct(Alias)
-      |> Alias.changeset(attrs)
-      |> Repo.insert()
-    end
+  def add_alias(attrs = %{:name => _, :alias => _, :when => _}) do
+    struct(Alias)
+    |> Alias.changeset(attrs)
+    |> Repo.insert()
+  end
 
   def add_alias(%{:name => n, :alias => a}) do
     attrs = %{:name => n, :alias => a, :when => now_tz()}

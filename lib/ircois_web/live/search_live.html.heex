@@ -2,7 +2,8 @@
 <div class="row">
 	<div class="col-lg-12">
 		<form phx-change="search" class="search-form">
-			<%= text_input :grep_field, :query, placeholder: "Pattern to search for", autofocus: true, "phx-debounce": "300", class: "form-control", autocomplete: "off" %>
+			<!-- <.input :grep_field, :query, placeholder: "Pattern to search for", autofocus: true, "phx-debounce": "300", class: "form-control", autocomplete: "off" /> -->
+			<input class="form-control" type="text" name="query">
 		</form>
 	</div>
 </div>
@@ -16,7 +17,7 @@
 					<%= for m <- @messages do %>
 					<tr >
 						<td class="timestamp"><%= show_time(m.when) %></td>
-						<td class="nickname" style="color: #<%= @color_map[m.from] %>;"><a href="<%= Routes.user_path(@socket, :user, m.from) %>"><%= m.from %></a></td>
+						<td class="nickname" style={"color: ##{@color_map[m.from]};"}><a href={~p"/user/#{m.from}"}><%= m.from %></a></td>
 						<td class="message" style="width: 78%;"><%= m.content %></td>
 					</tr>
 					<% end %>
