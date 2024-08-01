@@ -1,6 +1,6 @@
 ################################################################################
 # Build Image
-FROM elixir:alpine as build
+FROM elixir:1.17-alpine as build
 LABEL maintainer "Christophe De Troyer <christophe@call-cc.be>"
 
 # Install compile-time dependencies
@@ -22,7 +22,7 @@ RUN mix deps.compile
 
 # Build web assets.
 COPY assets assets
-RUN cd assets && npm install && npm run deploy
+# RUN cd assets && npm install && npm run deploy
 RUN mix phx.digest
 
 # Compile entire project.
