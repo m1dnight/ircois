@@ -1,6 +1,5 @@
 defmodule Ircois.Plugins.Stonks do
   use Ircois.Plugin.Macros
-  import Number.Currency
 
   help do
     [

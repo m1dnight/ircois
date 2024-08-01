@@ -3,7 +3,6 @@ defmodule IrcoisWeb.SearchLive do
   require Logger
   alias Ircois.PubSub
 
-  @impl true
   def mount(_params, _session, socket) do
     Logger.debug("Socket mounted #{inspect(socket, pretty: true)} #{inspect(self())}")
     PubSub.subscribe()
@@ -11,7 +10,6 @@ defmodule IrcoisWeb.SearchLive do
     {:ok, socket}
   end
 
-  @impl
   def handle_event("search", %{"query" => query}, socket) do
     cfg = Ircois.Config.read_config()
     channel = hd(cfg.channels)
@@ -42,7 +40,6 @@ defmodule IrcoisWeb.SearchLive do
     end
   end
 
-  @impl
   def handle_info(_m, socket) do
     {:noreply, socket}
   end

@@ -1,5 +1,5 @@
 defmodule Ircois.Data do
-  alias Ircois.{Message, Karma, URL, Balance, Fact, Alias}
+  alias Ircois.{Message, Karma, URL, Fact, Alias}
   alias Ircois.Repo
   import Ecto.Query
   alias Ircois.PubSub
