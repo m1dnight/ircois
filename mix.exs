@@ -53,7 +53,7 @@ defmodule Ircois.MixProject do
       {:number, "~> 1.0.1"},
       {:elixilorem, "~> 0.0.1", only: :dev},
       {:oauther, "~> 1.1"},
-      {:extwitter, "~> 0.12"},
+      {:extwitter, "~> 0.14"},
       {:timex, "~> 3.6"},
       {:esbuild, "~> 0.2", runtime: Mix.env() == :dev},
       {:tailwind, "~> 0.2.0", runtime: Mix.env() == :dev}
