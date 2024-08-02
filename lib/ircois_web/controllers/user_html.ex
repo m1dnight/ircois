@@ -47,5 +47,4 @@ defmodule IrcoisWeb.UserHTML do
   def format_float(f, decimals \\ 2) do
     trunc(f * :math.pow(10, decimals)) / :math.pow(10, decimals)
   end
-
 end

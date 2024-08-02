@@ -14,7 +14,10 @@ config :ircois,
 config :ircois, IrcoisWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "M6gD+aU4TpsQqACDsnob1WZmxzVUslZNn4fqhDQISE6G9XVFnIEXWBg1ZCTaxGo+",
-  render_errors: [view: IrcoisWeb.ErrorView, accepts: ~w(html json), layout: false],
+  render_errors: [
+    formats: [html: IrcoisWeb.ErrorHTML, json: IrcoisWeb.ErrorJSON],
+    layout: false
+  ],
   pubsub_server: Ircois.PubSub,
   live_view: [signing_salt: "1ifhtLMl"]
 
