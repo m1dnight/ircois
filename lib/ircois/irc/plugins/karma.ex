@@ -54,8 +54,7 @@ defmodule Ircois.Plugins.Karma do
       Ircois.Data.karma_top(15)
       |> Enum.sort_by(fn k -> k.karma end, &>=/2)
       |> Enum.zip(1..15)
-      |> Enum.map(fn {k, i} -> "#{i}) #{k.subject}: #{k.karma} points" end)
-      |> Enum.join("\n")
+      |> Enum.map_join("\n", fn {k, i} -> "#{i}) #{k.subject}: #{k.karma} points" end)
 
     {:reply, "Karma top 15\n#{responses}", e.state}
   end

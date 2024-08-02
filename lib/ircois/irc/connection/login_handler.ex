@@ -17,7 +17,7 @@ defmodule Ircois.Connection.LoginHandler do
     # Join all the channels defined in the config.
     config
     |> Map.get(:channels)
-    |> Enum.map(&ExIRC.Client.join(client, &1))
+    |> Enum.each(&ExIRC.Client.join(client, &1))
 
     {:noreply, state}
   end

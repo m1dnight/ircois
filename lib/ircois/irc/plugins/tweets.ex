@@ -30,7 +30,7 @@ defmodule Ircois.Plugins.Tweets do
     end
   end
 
-  defp config_auth() do
+  defp config_auth do
     credentials = Ircois.Config.read_config().twitter
 
     ExTwitter.configure(

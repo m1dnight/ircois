@@ -72,7 +72,7 @@ defmodule IrcoisWeb.SearchLive do
     |> Enum.into(%{})
   end
 
-  defp random_color() do
+  defp random_color do
     :rand.uniform(16_777_215) |> Integer.to_string(16)
   end
 end

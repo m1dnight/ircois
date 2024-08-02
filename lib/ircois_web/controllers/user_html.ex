@@ -11,10 +11,9 @@ defmodule IrcoisWeb.UserHTML do
   def bucket_values(buckets) do
     vals =
       buckets
-      |> Enum.map(fn {_t, p} ->
+      |> Enum.map_join(", ", fn {_t, p} ->
         "\"#{format_float(p * 100, 2)}\""
       end)
-      |> Enum.join(", ")
 
     "[#{vals}]"
   end
@@ -22,12 +21,11 @@ defmodule IrcoisWeb.UserHTML do
   def bucket_labels(buckets) do
     vals =
       buckets
-      |> Enum.map(fn {t, _p} ->
+      |> Enum.map_join(", ", fn {t, _p} ->
         hour = "#{t.hour}" |> String.pad_leading(2, "0")
         mins = "#{t.minute}" |> String.pad_leading(2, "0")
         "\"#{hour <> ":" <> mins}\""
       end)
-      |> Enum.join(", ")
 
     "[#{vals}]"
   end

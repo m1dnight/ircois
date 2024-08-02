@@ -1,5 +1,5 @@
 defmodule Ircois.Statistics do
-  alias Ircois.{Message}
+  alias Ircois.Message
   alias Ircois.Repo
   import Ecto.Query
 

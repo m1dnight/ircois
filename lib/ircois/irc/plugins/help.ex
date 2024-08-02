@@ -24,10 +24,9 @@ defmodule Ircois.Plugins.Help do
       |> Enum.flat_map(fn {_, plugin} ->
         Ircois.Plugin.Manager.get_help(plugin)
       end)
-      |> Enum.map(fn {cmd, help} ->
+      |> Enum.map_join("\n", fn {cmd, help} ->
         "#{cmd}: #{help}"
       end)
-      |> Enum.join("\n")
 
     if reply != "" do
       {:reply, reply, e.state}

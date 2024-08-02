@@ -16,7 +16,7 @@ defmodule Ircois.Config do
   @doc """
   Returns a default configuration file Elixir data structure.
   """
-  def default_config() do
+  def default_config do
     %Ircois.Config{
       channels: ["#ircois"],
       nickname: "ircois",
@@ -39,33 +39,31 @@ defmodule Ircois.Config do
   @doc """
   Reads the configuration file from the disk.
   """
-  def read_config() do
+  def read_config do
     path = Application.get_env(:ircois, :config)
     full_path = Path.absname(path)
 
     Logger.debug("Reading config #{inspect(full_path)}")
 
-    cond do
-      File.exists?(path) ->
-        with {:ok, content} <- File.read(path),
-             {:ok, map} <- Poison.decode(content) do
-          map =
-            map
-            |> Enum.map(fn {k, v} -> {String.to_atom(k), v} end)
-            |> Enum.into(%{})
-            |> Map.update(:modules, [], fn ms -> Enum.map(ms, &String.to_atom/1) end)
+    if File.exists?(path) do
+      with {:ok, content} <- File.read(path),
+           {:ok, map} <- Poison.decode(content) do
+        map =
+          map
+          |> Enum.map(fn {k, v} -> {String.to_atom(k), v} end)
+          |> Enum.into(%{})
+          |> Map.update(:modules, [], fn ms -> Enum.map(ms, &String.to_atom/1) end)
 
-          struct(__MODULE__, map)
-        else
-          e ->
-            Logger.error("Error reading config file #{inspect(full_path)}")
-            e
-        end
-
-      true ->
-        Logger.error("Configuration file #{inspect(full_path)} does not exist, creating default.")
-        create_default_config(path)
-        default_config()
+        struct(__MODULE__, map)
+      else
+        e ->
+          Logger.error("Error reading config file #{inspect(full_path)}")
+          e
+      end
+    else
+      Logger.error("Configuration file #{inspect(full_path)} does not exist, creating default.")
+      create_default_config(path)
+      default_config()
     end
   end
 

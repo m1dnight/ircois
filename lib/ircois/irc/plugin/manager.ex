@@ -13,7 +13,7 @@ defmodule Ircois.Plugin.Manager do
     GenServer.call(__MODULE__, {:get_help, module})
   end
 
-  def registered_plugins() do
+  def registered_plugins do
     GenServer.call(__MODULE__, :registered_plugins)
   end
 

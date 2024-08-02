@@ -13,8 +13,7 @@ defmodule Ircois.Plugins.PageTitle do
     titles =
       Regex.scan(r, e.message)
       |> Enum.flat_map(& &1)
-      |> Enum.map(&get_page_title/1)
-      |> Enum.join("\n")
+      |> Enum.map_join("\n", &get_page_title/1)
 
     {:reply, titles, e.state}
   end

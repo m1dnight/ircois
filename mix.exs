@@ -56,7 +56,8 @@ defmodule Ircois.MixProject do
       {:extwitter, "~> 0.12"},
       {:timex, "~> 3.6"},
       {:esbuild, "~> 0.2", runtime: Mix.env() == :dev},
-      {:tailwind, "~> 0.2.0", runtime: Mix.env() == :dev}
+      {:tailwind, "~> 0.2.0", runtime: Mix.env() == :dev},
+      {:credo, "~> 1.7", only: [:dev, :test], runtime: false}
     ]
   end
 

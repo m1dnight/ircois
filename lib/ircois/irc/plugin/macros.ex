@@ -12,11 +12,11 @@ defmodule Ircois.Plugin.Macros do
 
   defmacro __before_compile__(_env) do
     quote do
-      def reactions(), do: @reactions
+      def reactions, do: @reactions
 
-      def dms(), do: @dms
+      def dms, do: @dms
 
-      def rename(), do: @rename
+      def rename, do: @rename
     end
   end
 
@@ -24,7 +24,7 @@ defmodule Ircois.Plugin.Macros do
   # Define help string.
   defmacro help(do: body) do
     quote do
-      def help() do
+      def help do
         unquote(body)
       end
     end
@@ -34,7 +34,7 @@ defmodule Ircois.Plugin.Macros do
   # Define the initial state of the plugin.
   defmacro defstate(do: body) do
     quote do
-      def initial_state() do
+      def initial_state do
         unquote(body)
       end
     end

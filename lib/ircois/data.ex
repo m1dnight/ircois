@@ -1,9 +1,9 @@
 defmodule Ircois.Data do
-  alias Ircois.{Message, Karma, URL, Fact, Alias}
-  alias Ircois.Repo
-  import Ecto.Query
+  alias Ircois.{Alias, Fact, Karma, Message, URL}
   alias Ircois.PubSub
+  alias Ircois.Repo
 
+  import Ecto.Query
   #############################################################################
   # Aliases
 
@@ -352,7 +352,7 @@ defmodule Ircois.Data do
   ##############################################################################
   # Helpers
 
-  defp now_tz() do
+  defp now_tz do
     tz = Application.get_env(:ircois, :timezone)
     DateTime.now!(tz)
   end
