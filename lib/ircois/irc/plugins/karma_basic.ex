@@ -6,7 +6,7 @@ defmodule Ircois.Plugins.KarmaBasic do
     [
       {"`<subject>++/--`", "Increases (++) or decreases (--) the karma of <subject>."},
       {
-        "`!karma <subject>`",
+        "`,karma <subject>`",
         "Prints the karma of <subject> in the main channel."
       },
       {"`karmalist`", "Returns a webpage that contains the current karma list."},
@@ -20,7 +20,7 @@ defmodule Ircois.Plugins.KarmaBasic do
     {:noreply, e.state}
   end
 
-  react ~r/^[ \t]*!karma[ \t]+(?<sub>[^\s^\t]+)[ \t]*/i, e do
+  react ~r/^[ \t]*,karma[ \t]+(?<sub>[^\s^\t]+)[ \t]*/i, e do
     karma = Ircois.Data.get_karma(e.captures["sub"] |> String.downcase())
     {:reply, "'#{e.captures["sub"]}' has #{karma} karma points.", e.state}
   end
@@ -50,7 +50,7 @@ defmodule Ircois.Plugins.KarmaBasic do
   #   end
   # end
 
-  dm ~r/^[ \t]*karmatop[ \t]*$/i, e do
+  dm ~r/^[ \t]*,karmatop[ \t]*$/i, e do
     responses =
       Ircois.Data.karma_top(15)
       |> Enum.sort_by(fn k -> k.karma end, &>=/2)

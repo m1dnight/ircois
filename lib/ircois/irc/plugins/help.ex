@@ -3,12 +3,12 @@ defmodule Ircois.Plugins.Help do
 
   help do
     [
-      {"`help`", "Prints out the help for all loaded plugins."},
-      {"`info <plugin>`", "Show the specific commands for <plugin>."}
+      {"`,help`", "Prints out the help for all loaded plugins."},
+      {"`,info <plugin>`", "Show the specific commands for <plugin>."}
     ]
   end
 
-  hear ~r/^[ \t]*info\s(?<plugin>.+)[ \t]*/i, e do
+  hear ~r/^[ \t]*,info\s(?<plugin>.+)[ \t]*/i, e do
     sub = e.captures["plugin"] |> String.downcase()
 
     plugins = Ircois.Plugin.Manager.registered_plugins()
@@ -24,7 +24,7 @@ defmodule Ircois.Plugins.Help do
       |> Enum.flat_map(fn {_, plugin} ->
         Ircois.Plugin.Manager.get_help(plugin)
       end)
-      |> Enum.map_join("\n", fn {cmd, help} ->
+      |> Enum.map_join(" | ", fn {cmd, help} ->
         "#{cmd}: #{help}"
       end)
 
@@ -35,7 +35,7 @@ defmodule Ircois.Plugins.Help do
     end
   end
 
-  hear ~r/^[ \t]*help[ \t]*$/i, e do
+  hear ~r/^[ \t]*,help[ \t]*$/i, e do
     plugins = Ircois.Plugin.Manager.registered_plugins()
 
     human_readable =
