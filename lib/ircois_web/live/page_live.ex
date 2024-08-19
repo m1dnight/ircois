@@ -45,7 +45,7 @@ defmodule IrcoisWeb.PageLive do
 
     # Activity
     day_totals = Ircois.Data.message_count_per_day(default_channel)
-    hour_totals = Ircois.Data.message_count_per_hour(default_channel)
+    {:ok, hour_totals} = Ircois.Data.message_count_per_hour(default_channel)
     socket = assign(socket, :day_totals, day_totals)
     socket = assign(socket, :hour_totals, hour_totals)
 
@@ -99,9 +99,8 @@ defmodule IrcoisWeb.PageLive do
   def hour_totals_labels(hourtotals) do
     hourtotals
     |> Enum.map(fn %{hour: hour} ->
-      hour
+      "#{hour}:00"
     end)
-    |> Enum.map(&labels_hour/1)
     |> Jason.encode!()
   end
 
@@ -130,6 +129,7 @@ defmodule IrcoisWeb.PageLive do
     |> Jason.encode!()
   end
 
+  @spec labels_day(atom() | %{:day => any(), :month => any(), optional(any()) => any()}) :: <<_::8, _::_*8>>
   def labels_day(dt) do
     day = "#{dt.day}"
     month = "#{dt.month}" |> String.pad_leading(2, "0")

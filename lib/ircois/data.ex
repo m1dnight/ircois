@@ -167,33 +167,27 @@ defmodule Ircois.Data do
   @doc """
   Counts the average messages per hour for a channel.
   """
+  @spec message_count_per_hour(String.t()) :: [%{hour: integer, total: integer}]
   def message_count_per_hour(channel) do
-    subquery =
-      from m in Message,
-        select: %{
-          when_tz: fragment("(? AT TIME ZONE 'UTC')", m.when),
-          hour_tz: fragment("date_trunc('hour', (? AT TIME ZONE 'UTC'))", m.when)
-        },
-        where:
-          fragment(
-            "? > (now() - interval '48 hours')",
-            m.when
-          ) and m.channel == ^channel
+    query = """
+    WITH all_hours AS (SELECT *
+                      FROM GENERATE_SERIES(0, 23) hour),
+        message_count AS (SELECT EXTRACT('day' FROM inserted_at)::INTEGER AS hour
+                                , COUNT(*)                                 AS total
+                          FROM messages
+                          GROUP BY EXTRACT('day' FROM inserted_at)::INTEGER),
+        filled AS (SELECT all_hours.hour AS hour, COALESCE(message_count.total, 0) AS total
+                    FROM all_hours
+                            LEFT JOIN message_count ON all_hours.hour = message_count.hour)
+    SELECT *
+    FROM filled
+    ORDER BY hour;
+    """
 
-    query =
-      from m in subquery(subquery),
-        select: %{
-          total: fragment("count(*)"),
-          hour: m.hour_tz
-        },
-        group_by: fragment("hour_tz")
-
-    Repo.all(query)
-    |> Enum.map(fn %{total: t, hour: h} ->
-      tz_hour = DateTime.shift_zone!(h, Application.get_env(:ircois, :timezone))
-      %{total: t, hour: tz_hour, utc: h}
-    end)
-    |> Enum.sort_by(fn d -> d.hour end)
+    case Ecto.Adapters.SQL.query!(Ircois.Repo, query, []) do
+      %{rows: rows} -> {:ok, Enum.map(rows, fn [hour, total] -> %{hour: hour, total: total} end)}
+      _ -> {:error, :failed_to_query}
+    end
   end
 
   @doc """

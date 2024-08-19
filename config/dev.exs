@@ -4,7 +4,7 @@ import Config
 config :ircois, Ircois.Repo,
   username: "postgres",
   password: "postgres",
-  database: "ircois_dev",
+  database: "ircois_db",
   hostname: "localhost",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
