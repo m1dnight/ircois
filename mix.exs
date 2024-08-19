@@ -43,7 +43,7 @@ defmodule Ircois.MixProject do
       {:phoenix_live_dashboard, "~> 0.8"},
       {:telemetry_metrics, "~> 0.6"},
       {:telemetry_poller, "~> 0.5"},
-      {:gettext, "~> 0.11"},
+      {:gettext, "~> 0.25"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:exirc, "~> 2.0"},
