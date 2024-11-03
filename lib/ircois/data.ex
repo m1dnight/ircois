@@ -172,11 +172,14 @@ defmodule Ircois.Data do
     query = """
     WITH all_hours AS (SELECT *
                       FROM GENERATE_SERIES(0, 23) hour),
-        message_count AS (SELECT EXTRACT('day' FROM inserted_at)::INTEGER AS hour
-                                , COUNT(*)                                 AS total
-                          FROM messages
-                          GROUP BY EXTRACT('day' FROM inserted_at)::INTEGER),
-        filled AS (SELECT all_hours.hour AS hour, COALESCE(message_count.total, 0) AS total
+        message_count AS (SELECT
+                              EXTRACT('day' FROM m.when)::INTEGER AS hour
+                            , COUNT(*)                            AS total
+                          FROM messages AS m
+                          GROUP BY EXTRACT('day' FROM m.when)::INTEGER),
+        filled AS (SELECT
+                        all_hours.hour                   AS hour,
+                        COALESCE(message_count.total, 0) AS total
                     FROM all_hours
                             LEFT JOIN message_count ON all_hours.hour = message_count.hour)
     SELECT *

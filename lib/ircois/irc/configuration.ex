@@ -22,9 +22,9 @@ defmodule Ircois.Config do
       nickname: "ircois",
       password: "",
       port: 6667,
-      server: "irc.freenode.net",
+      server: "irc.libera.chat",
       user: "Cois",
-      modules: [],
+      modules: [Ircois.Plugins.Karma],
       coinmarketcap: "putapikeyhere",
       twitter: %{
         "access_token" => "api key",
@@ -41,6 +41,7 @@ defmodule Ircois.Config do
   """
   def read_config do
     path = Application.get_env(:ircois, :config)
+    IO.inspect(path)
     full_path = Path.absname(path)
 
     Logger.debug("Reading config #{inspect(full_path)}")
