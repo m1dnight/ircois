@@ -48,7 +48,7 @@ defmodule Ircois.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:exirc, "~> 2.0"},
       {:poison, "~> 6.0.0"},
-      {:tz, "~> 0.27.1"},
+      {:tz, "~> 0.28.0"},
       {:httpoison, "~> 2.0"},
       {:number, "~> 1.0.1"},
       {:oauther, "~> 1.1"},
