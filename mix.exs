@@ -38,7 +38,7 @@ defmodule Ircois.MixProject do
       {:postgrex, ">= 0.0.0"},
       {:phoenix_live_view, "~> 0.20.17"},
       {:floki, ">= 0.27.0", only: :test},
-      {:phoenix_html, "~> 4.1.1"},
+      {:phoenix_html, "~> 4.3.0"},
       {:phoenix_live_reload, "~> 1.5.3", only: :dev},
       {:phoenix_live_dashboard, "~> 0.8"},
       {:telemetry_metrics, "~> 1.0"},
