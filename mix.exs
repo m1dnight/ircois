@@ -54,7 +54,7 @@ defmodule Ircois.MixProject do
       {:oauther, "~> 1.1"},
       {:extwitter, "~> 0.14"},
       {:timex, "~> 3.6"},
-      {:esbuild, "~> 0.8", runtime: Mix.env() == :dev},
+      {:esbuild, "~> 0.10", runtime: Mix.env() == :dev},
       {:tailwind, "~> 0.2.0", runtime: Mix.env() == :dev},
       {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
       {:weechat_parser, git: "https://github.com/m1dnight/weechat_parser"}
