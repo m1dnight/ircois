@@ -40,7 +40,7 @@ defmodule Ircois.MixProject do
       {:floki, ">= 0.27.0", only: :test},
       {:phoenix_html, "~> 4.1.1"},
       {:phoenix_live_reload, "~> 1.5.3", only: :dev},
-      {:phoenix_live_dashboard, "~> 0.8"},
+      {:phoenix_live_dashboard, "~> 0.9"},
       {:telemetry_metrics, "~> 1.0"},
       {:telemetry_poller, "~> 1.0"},
       {:gettext, "~> 0.25"},
