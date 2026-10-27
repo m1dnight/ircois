@@ -49,7 +49,7 @@ defmodule Ircois.MixProject do
       {:exirc, "~> 2.0"},
       {:poison, "~> 6.0.0"},
       {:tz, "~> 0.27.1"},
-      {:httpoison, "~> 2.0"},
+      {:httpoison, "~> 3.0"},
       {:number, "~> 1.0.1"},
       {:oauther, "~> 1.1"},
       {:extwitter, "~> 0.14"},
